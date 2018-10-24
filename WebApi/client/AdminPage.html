@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title></title>
+
+
+    <script>
+        $(document).ready(function () {
+            var d = new Date();
+            let today = new Date().toISOString().substr(0, 16);
+            $("#date").val(today);
+
+           
+
+        })
+
+        function addNewMovie() {
+
+
+            let form = new FormData();
+            form.append('name', $("#name").val());
+            form.append('date', $("#date").val());
+            form.append('year', $("#year").val());
+            form.append('genre', $("#genre").find(":selected").text());
+
+            form.append('length', $("#length").val());
+            form.append('seats', $("#seats").val());
+
+            form.append('img', $("#file")[0].files[0]);
+
+
+            $.ajax({
+                url: "/api/movie",
+                method: "POST",
+                data: form,
+                contentType: false,
+                processData: false,
+                success: function (data) {                          	 		//פונקציה  שתופעל לאחר הצלחה
+                    alert("success");
+                },
+                error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
+                    //console.log(err);
+                    alert("error");
+                }
+
+            })
+        }
+
+    </script>
+
+</head>
+<body dir="rtl">
+    <form>
+        <table>
+            <!--name-->
+            <tr>
+                <td>
+                    <span>שם: </span>
+                </td>
+                <td>
+                    <input type="text" id="name" />
+                </td>
+            </tr>
+            <!--genre-->
+            <tr>
+                <td>
+                    <span>ז'אנר: </span>
+                </td>
+                <td>
+                    <select id="genre">
+                        <option selected>בחר</option>
+                        <option>קומדיה</option>
+                        <option>פעולה</option>
+                        <option>מתח</option>
+                        <option>מדע בדיוני</option>
+                        <option>דרמה</option>
+                        <option>רומנטי</option>
+                        <option>אימה</option>
+                    </select>
+                </td>
+            </tr>
+            <!--year-->
+            <tr>
+                <td>
+                    <span>שנת הוצאה: </span>
+                </td>
+                <td>
+                    <input type="text" id="year" />
+                </td>
+            </tr>
+            <!--length-->
+            <tr>
+                <td>
+                    <span>מספר דקות: </span>
+                </td>
+                <td>
+                    <input type="text" id="length" />
+                </td>
+            </tr>
+            <!--file-->
+            <tr>
+                <td>
+                    <span>תמונה: </span>
+                </td>
+                <td>
+                    <input type="file" id="file" />
+                    <br />
+                </td>
+            </tr>
+            <!--date-->
+            <tr>
+                <td>
+                    <span>תאריך ההקרנה: </span>
+                </td>
+                <td>
+                    <input type="datetime-local" id="date" />
+                    <br />
+                </td>
+            </tr>
+            <!--seats-->
+            <tr>
+                <td>
+                    <span>מספר הכיסאות: </span>
+                </td>
+                <td>
+                    <input type="text" id="seats" />
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="button" value="שמירה" onclick="addNewMovie()" />
+                    <input type="reset" value="איפוס" />
+                </td>
+            </tr>
+
+        </table>
+        
+    </form>
+
+
+
+
+</body>
+</html>

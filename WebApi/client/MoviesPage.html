@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>       
+   
+        table{
+            margin:auto;
+        }
+
+        img {
+            height: 300px;
+            display: block;
+            margin: auto;
+            margin-bottom:3px;
+        }
+
+        h1 {
+            color: #217969;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            /*letter-spacing: 3px;*/
+            text-align: center;
+            text-shadow: #53b4a2 1px 1px;
+        }
+
+        .genre {
+            float: right;
+            background-color: #605833;
+            border-radius: 5px 5px 5px 5px;
+            color: white;
+            float: right;
+            font-family: Enriqueta,Arial,sans-serif;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 3px 10px;
+            border: 1px solid #000000;
+        }
+
+        .circle {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%); /*border: 3px solid red;*/
+            float: left;
+            margin-left: -30px;
+            margin-top: -30px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .movie_div {
+            width: 300px;
+            height:450px;
+            border: solid black 2px;
+            border-radius: 15px;            
+            padding-bottom: 40px;
+            margin: 40px 40px 0 0;
+            background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0,0,0,.05) 100%);
+            -webkit-transition: 0.3s all;
+            background-size: 4px 4px;
+            -webkit-box-shadow: 0px 0px 15px 10px #00b8ff;
+            -moz-box-shadow: 0px 0px 15px 10px #00b8ff;
+            box-shadow: 0px 0px 15px 10px #00b8ff;
+            border: 1px dashed #046ca3;    
+            
+        }
+
+        .movie_div:hover{
+            background-color: lightblue;
+        }
+
+        .movie_data_span {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-right: 50px;
+            color: black;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            line-height: 10px;
+            font-weight: bold;
+        }
+
+        .date_time {
+            color: white;
+            font-size:14px;
+        }
+
+        .buttons_div {
+            float: right;
+            margin-top: 5px;
+            margin-right:45px;
+
+        }
+
+        .cart {
+            position: relative;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            margin-left: -50px;
+            animation: run_cart 0.2s linear 0s forwards;
+        }
+       
+        @-webkit-keyframes run_cart {
+            0% {
+                transform: translateX(0px);
+            }
+
+            100% {
+                transform: translateX(70px);
+            }
+        }
+
+        .right_button, .left_button {
+            -moz-box-shadow: inset 0px 1px 0px 0px #f29c93;
+            -webkit-box-shadow: inset 0px 1px 0px 0px #f29c93;
+            box-shadow: inset 0px 1px 0px 0px #f29c93;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
+            background: -moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: -webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: -o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: -ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
+            background-color: #fe1a00;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            border: 1px solid #d83526;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #b23e35;
+        }
+
+            .right_button:hover, .left_button:hover {
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
+                background: -moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: -webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: -o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: -ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
+                background-color: #ce0100;
+            }
+
+        .right_button {
+            margin-left: 10px;
+        }
+
+        .left_button {
+            margin-right: 10px;
+        }
+    </style>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            moviesArr = [];
+
+            $.ajax({
+                dataType: "json",	    		                           		 //סוג הנתונים שאנחנו מצפים לקבל מהשרת
+                url: "/api/movie",
+                contentType: "application/json; charset=utf-8",	               //סוג הנתונים שאנחנו שולחים לשרת
+                method: "GET",			                        	               //סוג הפעולה		
+                //data: JSON.stringify(data to send goes here),			//הנתונים עצמם שאנחנו שולחים
+                success: function (data) {                          	 		//פונקציה  שתופעל לאחר הצלחה
+
+                    if (data) {
+
+                        for (var i in data) {
+                            if (i % 3 == 0)
+                                $moviesTableTr = $('<tr>');
+                            getNewMovie(i ,$moviesTableTr, data[i].name, data[i].date,
+                                data[i].year, data[i].genre, data[i].length, data[i].movie_img_url, data[i].seats);
+                        }
+                    }
+                    else {
+                        alert("no movies");
+                    }
+                },
+                error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
+                    alert("error");
+                }
+            });            
+
+        })
+
+
+        // פונקציה שיוצרת דיב של סרט בצורה דינאמית
+        function getNewMovie(index, $moviesTableTr, name, date, year, genre, length, movie_img_url, seats) {
+
+            movieEnName = movie_img_url.substring(8, movie_img_url.length - 4);
+            moviesArr.push(movieEnName);
+            var $moviesTableTd = $('<td>');
+
+            var $movieDiv = $('<div>').addClass('movie_div');
+
+            var $genre = $('<span>').addClass('genre').html(genre);
+            $movieDiv.append($genre)     
+            $movieDiv.append($('<br />'))
+
+            var $date = $('<span>').addClass('date_time').html(date.substring(0, 10).split("-").reverse().join("-"));
+            var $time = $('<span>').addClass('date_time').html(date.substring(11,16));
+            var $circleDiv = $('<div>').addClass('circle');
+            $circleDiv.append($('<br />'))
+            $circleDiv.append($date);
+            $circleDiv.append($('<br />'))
+            $circleDiv.append($time);
+            $movieDiv.append($circleDiv)
+
+            var $headline = $('<h1>').html(name);
+            $movieDiv.append($headline)
+
+            var $img = $('<img>').attr('src', movie_img_url);
+            $movieDiv.append($img)
+            $movieDiv.append($('<span>').addClass('movie_data_span').html("שנה: "));
+            var $year = $('<span>').html(year);
+            $movieDiv.append($year);
+            $movieDiv.append($('<br />'))
+            $movieDiv.append($('<span>').addClass('movie_data_span').html("מספר דקות: "));
+            var $length = $('<span>').html(length);
+            $movieDiv.append($length);
+            $movieDiv.append($('<br />'))
+            $movieDiv.append($('<span>').addClass('movie_data_span').html("מקומות פנויים: "));
+            var $seats = $('<span>').html(seats);
+            $movieDiv.append($seats);
+            $movieDiv.append($('<br />'))
+            $movieDiv.append($('<span>').addClass('movie_data_span').html("רכישת כרטיסים: "));
+        
+            var $buttons_div = $('<div>').addClass('buttons_div');
+
+            var $plusBtn = $('<input type = "button" value = "+">').addClass('right_button');
+            $buttons_div.append($plusBtn);
+            $buttons_div.append($('<span>').html("0").attr("id", "tickets_" + movieEnName));                    
+            var $minusBtn = $('<input type = "button" value = "-">').addClass('left_button');
+            $buttons_div.append($minusBtn);          
+            $movieDiv.append($buttons_div);
+            var $cart_link = $('<a>').attr("href", "AdminPage.html");
+            var $cart = $('<img>').attr('src', "../images/cart.png").addClass('cart').hide();
+            $cart_link.append($cart);
+            $movieDiv.append($cart_link);
+            $plusBtn.click(function () {
+                plusTicket(index, $cart);
+            });
+            $minusBtn.click(function () {
+                minusTicket(index, $cart);
+            });
+
+            $moviesTableTd.append($movieDiv);
+            $moviesTableTr.append($moviesTableTd);     
+            $("#table").append($moviesTableTr);
+
+        }
+
+        function plusTicket(index, $cart) {
+
+            var currentAmount = parseInt($("#tickets_" + moviesArr[index]).html());
+            currentAmount = currentAmount + 1;
+            $("#tickets_" + moviesArr[index]).html(currentAmount);
+            $cart.show();
+        }
+
+        function minusTicket(index, $cart) {
+
+            var currentAmount = parseInt($("#tickets_" + moviesArr[index]).html());
+            if (currentAmount > 0) {
+                currentAmount = currentAmount - 1;
+                $("#tickets_" + moviesArr[index]).html(currentAmount);
+            }
+            if (currentAmount == 0)
+                $cart.hide();      
+        }
+
+
+
+
+    </script>
+
+
+</head>
+
+<body dir="rtl"> 
+
+    <table id="table">
+        <tr id="tr"></tr>
+    </table>
+
+</body>
+</html >

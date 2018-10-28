@@ -25,6 +25,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="movie_number" Type="int" />
           <Property Name="user_seats" Type="int" />
+          <Property Name="order_date" Type="datetime" />
         </EntityType>
         <Association Name="FK__Orders__movie_nu__403A8C7D">
           <End Role="Movies" Type="Self.Movies" Multiplicity="0..1" />
@@ -72,6 +73,7 @@
           <Property Name="movie_number" Type="Int32" />
           <Property Name="user_seats" Type="Int32" />
           <NavigationProperty Name="Movies" Relationship="Self.FK__Orders__movie_nu__403A8C7D" FromRole="Orders" ToRole="Movies" />
+          <Property Name="order_date" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK__Orders__movie_nu__403A8C7D">
           <End Role="Movies" Type="Self.Movies" Multiplicity="0..1" />
@@ -116,6 +118,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="CinemaModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="movie_number" ColumnName="movie_number" />
                 <ScalarProperty Name="user_seats" ColumnName="user_seats" />

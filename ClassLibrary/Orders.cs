@@ -17,6 +17,7 @@ namespace ClassLibrary
         public int id { get; set; }
         public Nullable<int> movie_number { get; set; }
         public Nullable<int> user_seats { get; set; }
+        public Nullable<System.DateTime> order_date { get; set; }
     
         public virtual Movies Movies { get; set; }
     }

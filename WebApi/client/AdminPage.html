@@ -3,17 +3,386 @@
 <head>
     <meta charset="utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
 
     <title></title>
 
+    <style>
+        body {
+            background-image: url('../images/background.jpeg');
+        }
+        table{
+            margin:50px; 
+            float:right;
+        }
+
+        #fields{
+            font-weight:bold;
+            padding-right:5px;
+        }
+        #name, #genre, #length, #seats, #year, #date{
+            width:100%;
+        }
+
+        .save_btn {
+            -moz-box-shadow: 0px 10px 14px -7px #276873;
+            -webkit-box-shadow: 0px 10px 14px -7px #276873;
+            box-shadow: 0px 10px 14px -7px #276873;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99));
+            background: -moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+            background: -webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+            background: -o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+            background: -ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+            background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+            background-color: #599bb3;
+            -moz-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 7px 25px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #3d768a;
+        }
+
+        .save_btn:hover {
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
+            background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+            background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+            background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+            background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+            background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+            background-color: #408c99;
+        }
+
+        .save_btn:active {
+            position: relative;
+            top: 1px;
+        }
+
+        .reset {
+            -moz-box-shadow: 3px 4px 0px 0px #899599;
+            -webkit-box-shadow: 3px 4px 0px 0px #899599;
+            box-shadow: 3px 4px 0px 0px #899599;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #bab1ba));
+            background: -moz-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+            background: -webkit-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+            background: -o-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+            background: -ms-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+            background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#bab1ba',GradientType=0);
+            background-color: #ededed;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            border: 1px solid #d6bcd6;
+            display: inline-block;
+            cursor: pointer;
+            color: #3a8a9e;
+            font-family: Arial;
+            font-size: 17px;
+            padding: 7px 25px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #e1e2ed;
+        }
+
+            .reset:hover {
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
+                background: -moz-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+                background: -webkit-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+                background: -o-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+                background: -ms-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+                background: linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bab1ba', endColorstr='#ededed',GradientType=0);
+                background-color: #bab1ba;
+            }
+
+            .reset:active {
+                position: relative;
+                top: 1px;
+            }
+
+        .preview_btn {
+            -moz-box-shadow: inset 0px 1px 3px 0px #91b8b3;
+            -webkit-box-shadow: inset 0px 1px 3px 0px #91b8b3;
+            box-shadow: inset 0px 1px 3px 0px #91b8b3;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
+            background: -moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+            background: -webkit-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+            background: -o-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+            background: -ms-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+            background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#768d87', endColorstr='#6c7c7c',GradientType=0);
+            background-color: #768d87;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            border: 1px solid #566963;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 7px 25px;
+            text-decoration: none;
+            text-shadow: 0px -1px 0px #2b665e;
+        }
+
+            .preview_btn:hover {
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
+                background: -moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+                background: -webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+                background: -o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+                background: -ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+                background: linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
+                background-color: #6c7c7c;
+            }
+
+            .preview_btn:active {
+                position: relative;
+                top: 1px;
+            }
+
+        img {
+            height: 250px;
+            display: block;
+            margin: auto;
+            margin-bottom: 3px;
+        }
+        h1 {
+            color: #217969;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            /*letter-spacing: 3px;*/
+            text-align: center;
+            text-shadow: #53b4a2 1px 1px;
+            padding-right: 30px;
+        }
+
+        .genre {
+            float: right;
+            border-radius: 5px 5px 5px 5px;
+            margin-right: -1px;
+            margin-top: -1px;
+            color: white;
+            float: right;
+            font-family: Enriqueta,Arial,sans-serif;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 3px 10px;
+            border: 1px solid #000000;
+            font-weight: bold;
+            background-size: 20px;
+            background-repeat: no-repeat;
+            padding-left: 30px;
+        }
+
+        #drama {
+            background-color: #605833;
+            background-image: url('../images/drama.png');
+        }
+
+        #horror {
+            background-color: maroon;
+            background-image: url('../images/horror.png');
+        }
+
+        #action {
+            background-color: darkblue;
+            background-image: url('../images/action.png');
+        }
+
+        #comedy {
+            background-color: lime;
+            background-image: url('../images/comedy.png');
+        }
+
+        #romance {
+            background-color: red;
+            background-image: url('../images/romance.png');
+        }
+
+        #science_fiction {
+            background-color: sandybrown;
+            background-image: url('../images/science_fiction.png');
+        }
+
+        #thriller {
+            background-color: darkslategray;
+            background-image: url('../images/thriller.png');
+        }
+
+
+
+        .circle {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%); /*border: 3px solid red;*/
+            float: left;
+            margin-left: -30px;
+            margin-top: -30px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+
+        .movie_div {
+            float:left;
+            width: 300px;
+            height: 450px;
+            border: solid black 2px;
+            border-radius: 15px;
+            margin-top:50px;
+            margin-left:300px;
+            background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0,0,0,.05) 100%);
+            -webkit-transition: 0.3s all;
+            background-size: 4px 4px;
+            -webkit-box-shadow: 0px 0px 15px 10px #00b8ff;
+            -moz-box-shadow: 0px 0px 15px 10px #00b8ff;
+            box-shadow: 0px 0px 15px 10px #00b8ff;
+            border: 1px dashed #046ca3;
+        }
+
+            .movie_div:hover {
+                background-color: lightblue;
+            }
+
+        .movie_data_span {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-right: 50px;
+            color: black;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            line-height: 10px;
+            font-weight: bold;
+        }
+
+        .date_time {
+            color: white;
+            font-weight: bold;
+        }
+
+        #date_preview {
+            font-size: 18px;
+        }
+
+        #time_preview {
+            font-style: italic;
+            font-size: 14px;
+        }
+        .buttons_div {
+            float: right;
+            margin-top: 5px;
+            margin-right: 45px;
+        }
+
+        .right_button, .left_button {
+            -moz-box-shadow: inset 0px 1px 0px 0px #f29c93;
+            -webkit-box-shadow: inset 0px 1px 0px 0px #f29c93;
+            box-shadow: inset 0px 1px 0px 0px #f29c93;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
+            background: -moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: -webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: -o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: -ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+            background: linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
+            background-color: #fe1a00;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            border: 1px solid #d83526;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #b23e35;
+        }
+
+            .right_button:hover, .left_button:hover {
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
+                background: -moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: -webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: -o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: -ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+                background: linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
+                background-color: #ce0100;
+            }
+
+        .right_button {
+            margin-left: 10px;
+        }
+
+        .left_button {
+            margin-right: 10px;
+        }
+
+        .cart {
+            position: relative;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            margin-left: 20px;
+        }
+    </style>
 
     <script>
         $(document).ready(function () {
-            var d = new Date();
+
             let today = new Date().toISOString().substr(0, 16);
             $("#date").val(today);
 
+         
+
+            $("#preview").click(function () {
+
+                $("#movie_div").css("visibility", "visible");
+
+                $("#genre_preview").html($("#genre").find(":selected").text());
+                setGenreColor();
+
+                let date = $("#date").val();               
+                $("#date_preview").html(date.substring(5, 10).split("-").reverse().join("/"));
+                $("#time_preview").html(date.substring(11, 16));
+                $("#name_preview").html($("#name").val());
+                $("#year_preview").html($("#year").val());
+                $("#length_preview").html($("#length").val());
+                $("#seats_preview").html($("#seats").val());
+                var rdr = new FileReader();
+                rdr.readAsDataURL($("#file")[0].files[0]);
+                rdr.onload = function () {
+              
+                    $("#img_preview").attr('src', rdr.result);
+                }
+        
+            })
+
+            $("input[type='reset']").closest('form').on('reset', function (event) {
+
+                // executes before the form has been reset
+                $("#movie_div").css("visibility", "hidden");
+
            
+            });
 
         })
 
@@ -21,6 +390,7 @@
 
 
             let form = new FormData();
+
             form.append('name', $("#name").val());
             form.append('date', $("#date").val());
             form.append('year', $("#year").val());
@@ -29,7 +399,7 @@
             form.append('length', $("#length").val());
             form.append('seats', $("#seats").val());
 
-            form.append('img', $("#file")[0].files[0]);
+            form.append('img', $("#file")[0].files[0].FileName);
 
 
             $.ajax({
@@ -38,6 +408,7 @@
                 data: form,
                 contentType: false,
                 processData: false,
+
                 success: function (data) {                          	 		//פונקציה  שתופעל לאחר הצלחה
                     alert("success");
                 },
@@ -49,6 +420,35 @@
             })
         }
 
+        function setGenreColor() {
+
+            $genreSpan = $(".genre");
+
+            switch ($genreSpan.html()) {
+                case "קומדיה":
+                    $genreSpan.attr("id", "comedy");
+                    break;
+                case "מדע בדיוני":
+                    $genreSpan.attr("id", "science_fiction");
+                    break;
+                case "פעולה":
+                    $genreSpan.attr("id", "action");
+                    break;
+                case "דרמה":
+                    $genreSpan.attr("id", "drama");
+                    break;
+                case "מתח":
+                    $genreSpan.attr("id", "thriller");
+                    break;
+                case "אימה":
+                    $genreSpan.attr("id", "horror");
+                    break;
+                case "רומנטי":
+                    $genreSpan.attr("id", "romance");
+                    break;
+            }
+        }
+
     </script>
 
 </head>
@@ -57,7 +457,7 @@
         <table>
             <!--name-->
             <tr>
-                <td>
+                <td class="w3-blue-grey" id="fields">
                     <span>שם: </span>
                 </td>
                 <td>
@@ -66,43 +466,43 @@
             </tr>
             <!--genre-->
             <tr>
-                <td>
+                <td class="w3-blue-grey" id="fields">
                     <span>ז'אנר: </span>
                 </td>
                 <td>
                     <select id="genre">
                         <option selected>בחר</option>
-                        <option>קומדיה</option>
-                        <option>פעולה</option>
-                        <option>מתח</option>
-                        <option>מדע בדיוני</option>
-                        <option>דרמה</option>
-                        <option>רומנטי</option>
                         <option>אימה</option>
+                        <option>דרמה</option>
+                        <option>מדע בדיוני</option>
+                        <option>מתח</option>
+                        <option>פעולה</option>
+                        <option>קומדיה</option>
+                        <option>רומנטי</option>
                     </select>
                 </td>
             </tr>
             <!--year-->
             <tr>
-                <td>
+                <td class="w3-blue-grey" id="fields">
                     <span>שנת הוצאה: </span>
                 </td>
                 <td>
-                    <input type="text" id="year" />
+                    <input type="number" id="year" />
                 </td>
             </tr>
             <!--length-->
             <tr>
-                <td>
+                <td class="w3-blue-grey" id="fields">
                     <span>מספר דקות: </span>
                 </td>
                 <td>
-                    <input type="text" id="length" />
+                    <input type="number" id="length" />
                 </td>
             </tr>
             <!--file-->
             <tr>
-                <td>
+                <td class="w3-blue-grey" id="fields">
                     <span>תמונה: </span>
                 </td>
                 <td>
@@ -112,7 +512,7 @@
             </tr>
             <!--date-->
             <tr>
-                <td>
+                <td class="w3-blue-grey" id="fields">
                     <span>תאריך ההקרנה: </span>
                 </td>
                 <td>
@@ -122,23 +522,55 @@
             </tr>
             <!--seats-->
             <tr>
-                <td>
+                <td class="w3-blue-grey" id="fields">
                     <span>מספר הכיסאות: </span>
                 </td>
                 <td>
-                    <input type="text" id="seats" />
+                    <input type="number" id="seats" />
                     <br />
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="button" value="שמירה" onclick="addNewMovie()" />
-                    <input type="reset" value="איפוס" />
+                    <input type="button" class="save_btn" id="save" value="שמירה" onclick="addNewMovie()" />
+                    <input type="reset" class="reset" value="איפוס" />
+                    <input type="button" class="preview_btn" id="preview" value="תצוגה מקדימה" />
                 </td>
             </tr>
 
         </table>
+
+        <div class="movie_div" id="movie_div" style="visibility:hidden">
+            <span class="genre" id="genre_preview"></span>
+            <br />
+            <div class="circle">
+                <br />
+                <span class="date_time" id="date_preview"></span>
+                <br />
+                <span class="date_time" id="time_preview"></span>
+            </div>
+            <h1 id="name_preview"></h1>
+            <img id="img_preview" />
+            <span class="movie_data_span">שנה: </span>
+            <span id="year_preview"></span>
+            <br />
+            <span class="movie_data_span">מספר דקות: </span>
+            <span id="length_preview"></span>
+            <br />
+            <span class="movie_data_span">מקומות פנויים: </span>
+            <span id="seats_preview"></span>
+            <br />
+            <span class="movie_data_span">רכישת כרטיסים : </span>
+            <div class="buttons_div">
+                <input type="button" value="+" class="right_button" />
+                <span>0</span>
+                <input type="button" value="-" class="left_button" />
+            </div>
+            <a>
+                <img class="cart" src="../images/cart.png" />
+            </a>
+        </div>
         
     </form>
 

@@ -16,8 +16,8 @@ namespace WebApi.Controllers
         // GET api/<controller>
         public List<MovieDto> Get()
         {
-            //return new string[] { "value1", "value2" };
             CinemaDB db = new CinemaDB();
+
             return db.Movies.Select(x => new MovieDto()
             {
                 number = x.number,
@@ -32,15 +32,28 @@ namespace WebApi.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public List<MovieDto> Get(string id)
         {
-            return "value";
+            CinemaDB db = new CinemaDB();
+            return db.Movies.Where(s => s.name.StartsWith(id)).Select(x => new MovieDto()
+            {
+                number = x.number,
+                name = x.name,
+                date = x.date,
+                year = x.year,
+                genre = x.genre,
+                length = x.length,
+                movie_img_url = x.movie_img_url,
+                seats = x.seats
+            }).OrderBy(y => y.date).ToList();
+
         }
 
         // POST api/<controller>
         [HttpPost]
-        public void insertNewMovie()
+        public void setNewMovie()
         {
+
             Movies movie = new Movies();
             movie.name = HttpContext.Current.Request.Params["name"];
             movie.date = Convert.ToDateTime(HttpContext.Current.Request.Params["date"]);
@@ -60,8 +73,18 @@ namespace WebApi.Controllers
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [Route("api/movie/{movieNumber}/{userAmountSeats}")]
+        public void Put(int movieNumber, string seats)
         {
+            CinemaDB db = new CinemaDB();
+
+            Movies movie = db.Movies.SingleOrDefault(x => x.number == movieNumber);
+
+            if (movie != null)
+            {
+                movie.seats = Convert.ToInt32(seats);
+                db.SaveChanges();
+            }          
         }
 
         // DELETE api/<controller>/5

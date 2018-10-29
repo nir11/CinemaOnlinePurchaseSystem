@@ -249,8 +249,8 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="client\AdminPage.html" />
-    <Content Include="client\HtmlPage1.html" />
     <Content Include="client\MoviesPage.html" />
+    <Content Include="client\TheaterPage.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

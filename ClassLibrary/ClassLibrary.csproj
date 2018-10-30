@@ -72,6 +72,9 @@
       <DependentUpon>CinemaEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Theater.cs">
+      <DependentUpon>CinemaEFModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CinemaEFModel.edmx">

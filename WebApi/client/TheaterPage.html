@@ -209,17 +209,46 @@
 
         $(document).ready(function () {
 
+            var currentMovie = 2;
+
+            $.ajax({
+                dataType: "json",	    		                           		 //סוג הנתונים שאנחנו מצפים לקבל מהשרת
+                url: "/api/theater/" + currentMovie,
+                contentType: "application/json; charset=utf-8",	               //סוג הנתונים שאנחנו שולחים לשרת
+                method: "GET",			                        	               //סוג הפעולה		
+                //data: JSON.stringify(data to send goes here),			//הנתונים עצמם שאנחנו שולחים
+                success: function (data) {                          	 		//פונקציה  שתופעל לאחר הצלחה
+
+                    if (data) {
+                        alert(bin2String(data));
+                    }
+                    else {
+                        alert("no such theater");
+                    }
+                },
+                error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
+                    alert("error");
+                }
+            });
+
+
             //סימון המקומות ע"י הלקוח
             $('.cinema-seats .seat').on('click', function () {
                 $(this).toggleClass('active');
                 alert(event.target.id + " כיסא");
 
-            });
-
-
-
+            });        
           
         })
+
+        function bin2String(array) {
+            var result = "";
+            for (var i = 0; i < array.length; i++) {
+                result += String.fromCharCode(parseInt(array[i], 2));
+            }
+            return result;
+        }
+
 
        
     </script>

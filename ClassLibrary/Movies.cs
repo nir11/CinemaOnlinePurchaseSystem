@@ -18,6 +18,7 @@ namespace ClassLibrary
         public Movies()
         {
             this.Orders = new HashSet<Orders>();
+            this.Theater = new HashSet<Theater>();
         }
     
         public int number { get; set; }
@@ -31,5 +32,7 @@ namespace ClassLibrary
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Theater> Theater { get; set; }
     }
 }

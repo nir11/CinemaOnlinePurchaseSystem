@@ -27,6 +27,14 @@
           <Property Name="user_seats" Type="int" />
           <Property Name="order_date" Type="datetime" />
         </EntityType>
+        <EntityType Name="Theater">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="movie_number" Type="int" />
+          <Property Name="avail_seats" Type="varbinary" MaxLength="160" />
+        </EntityType>
         <Association Name="FK__Orders__movie_nu__403A8C7D">
           <End Role="Movies" Type="Self.Movies" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -39,12 +47,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Theater__movie_n__5CD6CB2B">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="0..1" />
+          <End Role="Theater" Type="Self.Theater" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="number" />
+            </Principal>
+            <Dependent Role="Theater">
+              <PropertyRef Name="movie_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CinemaModelStoreContainer">
           <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Theater" EntityType="Self.Theater" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Orders__movie_nu__403A8C7D" Association="Self.FK__Orders__movie_nu__403A8C7D">
             <End Role="Movies" EntitySet="Movies" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Theater__movie_n__5CD6CB2B" Association="Self.FK__Theater__movie_n__5CD6CB2B">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Theater" EntitySet="Theater" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -64,6 +89,7 @@
           <Property Name="movie_img_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__movie_nu__403A8C7D" FromRole="Movies" ToRole="Orders" />
           <Property Name="seats" Type="Int32" />
+          <NavigationProperty Name="Theater" Relationship="CinemaModel.FK__Theater__movie_n__5CD6CB2B" FromRole="Movies" ToRole="Theater" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -94,7 +120,33 @@
             <End Role="Movies" EntitySet="Movies" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <EntitySet Name="Theater" EntityType="CinemaModel.Theater" />
+          <AssociationSet Name="FK__Theater__movie_n__5CD6CB2B" Association="CinemaModel.FK__Theater__movie_n__5CD6CB2B">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Theater" EntitySet="Theater" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Theater">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="movie_number" Type="Int32" />
+          <Property Name="avail_seats" Type="Binary" MaxLength="160" FixedLength="false" />
+          <NavigationProperty Name="Movies" Relationship="CinemaModel.FK__Theater__movie_n__5CD6CB2B" FromRole="Theater" ToRole="Movies" />
+        </EntityType>
+        <Association Name="FK__Theater__movie_n__5CD6CB2B">
+          <End Type="CinemaModel.Movies" Role="Movies" Multiplicity="0..1" />
+          <End Type="CinemaModel.Theater" Role="Theater" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="number" />
+            </Principal>
+            <Dependent Role="Theater">
+              <PropertyRef Name="movie_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -122,6 +174,15 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="movie_number" ColumnName="movie_number" />
                 <ScalarProperty Name="user_seats" ColumnName="user_seats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Theater">
+            <EntityTypeMapping TypeName="CinemaModel.Theater">
+              <MappingFragment StoreEntitySet="Theater">
+                <ScalarProperty Name="avail_seats" ColumnName="avail_seats" />
+                <ScalarProperty Name="movie_number" ColumnName="movie_number" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="247f88b7e7634f97a014da3dd67d024c" Name="Diagram1">
+      <Diagram DiagramId="247f88b7e7634f97a014da3dd67d024c" Name="Diagram1" ZoomLevel="91">
         <EntityTypeShape EntityType="CinemaModel.Movies" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.Orders" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="CinemaModel.FK__Orders__movie_nu__403A8C7D" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CinemaModel.Theater" Width="1.5" PointX="3" PointY="4.625" />
-        <AssociationConnector Association="CinemaModel.FK__Theater__movie_n__5CD6CB2B" />
+        <EntityTypeShape EntityType="CinemaModel.Theaters" Width="1.5" PointX="3" PointY="4.625" />
+        <AssociationConnector Association="CinemaModel.FK__Theaters__movie___02FC7413" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

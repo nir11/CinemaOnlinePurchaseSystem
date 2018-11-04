@@ -166,7 +166,7 @@
             }
         }
 
-        .right_button, .left_button {
+        .right_button, .left_button, .purchase_btn{
             -moz-box-shadow: inset 0px 1px 0px 0px #f29c93;
             -webkit-box-shadow: inset 0px 1px 0px 0px #f29c93;
             box-shadow: inset 0px 1px 0px 0px #f29c93;
@@ -193,7 +193,7 @@
             text-shadow: 0px 1px 0px #b23e35;
         }
 
-            .right_button:hover, .left_button:hover {
+            .right_button:hover, .left_button:hoverm, .purchase_btn:hover {
                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
                 background: -moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
                 background: -webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
@@ -203,6 +203,9 @@
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
                 background-color: #ce0100;
             }
+        .purchase_btn{
+            float:left;
+        }
 
         .right_button {
             margin-left: 10px;
@@ -381,7 +384,13 @@
             $buttons_div.append($minusBtn);          
             $movieDiv.append($buttons_div);
 
-            var $cart_link = $('<a>').attr("href", "AdminPage.html");
+            //===================================================
+            $movieDiv.append($('<br />'))
+            var $purchseBtn = $('<input type = "button" value = "רכישת כרטיס">').addClass('purchase_btn');
+            $movieDiv.append($purchseBtn);
+            //===================================================
+
+            var $cart_link = $('<a>').attr("href", "TheaterPage.html");
             var $cart = $('<img>').attr('src', "../images/cart.png").addClass('cart').hide();
 
             $cart.on('click', function () {
@@ -426,6 +435,17 @@
 
             });
 
+            $purchseBtn.click(function () {
+
+                var movie = {
+                    name: name,
+                    number: number,
+                    date: $date.html(),
+                    time: $time.html()
+                }
+                localStorage.setItem("movie", JSON.stringify(movie));
+                location.href = "TheaterPage.html";
+            })
      
             $cart_link.append($cart);
 

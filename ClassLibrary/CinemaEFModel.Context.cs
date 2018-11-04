@@ -28,6 +28,6 @@ namespace ClassLibrary
     
         public virtual DbSet<Movies> Movies { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Theater> Theater { get; set; }
+        public virtual DbSet<Theaters> Theaters { get; set; }
     }
 }

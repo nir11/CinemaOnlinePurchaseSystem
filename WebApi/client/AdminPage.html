@@ -20,8 +20,8 @@
             font-weight:bold;
             padding-right:5px;
         }
-        #name, #genre, #length, #seats, #year, #date{
-            width:100%;
+        #name, #genre, #length, #seats, #year, #date, #hall_num {
+            width: 100%;
         }
 
         .save_btn {
@@ -520,6 +520,17 @@
                     <br />
                 </td>
             </tr>
+            <!--hall number-->
+            <tr>
+                <td class="w3-blue-grey" id="fields">
+                    <span>מספר אולם: </span>
+                </td>
+                <td>
+                    <input type="number" id="hall_num" />
+                    <br />
+                </td>
+            </tr>
+
             <!--seats-->
             <tr>
                 <td class="w3-blue-grey" id="fields">

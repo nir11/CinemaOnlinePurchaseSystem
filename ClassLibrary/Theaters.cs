@@ -12,11 +12,12 @@ namespace ClassLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class Theater
+    public partial class Theaters
     {
-        public int id { get; set; }
         public Nullable<int> movie_number { get; set; }
-        public byte[] avail_seats { get; set; }
+        public int id { get; set; }
+        public string avail_seats_arr { get; set; }
+        public Nullable<int> hall_num { get; set; }
     
         public virtual Movies Movies { get; set; }
     }

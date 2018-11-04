@@ -24,13 +24,14 @@ namespace WebApi.Controllers
         }
 
         // POST api/<controller>
-        [HttpPost]
-        public void setNewOrder()
+        [Route("api/order/{num}/{seatsAmount}")]
+        public void Post(int num, int seatsAmount, [FromBody]string seatsPositions)
         {
             Orders order = new Orders();
-            order.movie_number = Convert.ToInt32(HttpContext.Current.Request.Params["number"]);
-            order.user_seats = Convert.ToInt32(HttpContext.Current.Request.Params["userAmountChoice"]);
+            order.movie_number = num;
+            order.user_seats_amount = seatsAmount;
             order.order_date = DateTime.Now;
+            order.user_seats_positions = seatsPositions;
             CinemaDB db = new CinemaDB();
             db.Orders.Add(order);
             db.SaveChanges();

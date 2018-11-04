@@ -236,6 +236,7 @@
     <Compile Include="Controllers\TheaterController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\MovieDto.cs" />
+    <Compile Include="DTO\TheaterDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -262,6 +263,7 @@
     <Content Include="images\action.png" />
     <Content Include="images\background.jpeg" />
     <Content Include="images\cart.png" />
+    <Content Include="images\cinema_screen.jpg" />
     <Content Include="images\comedy.png" />
     <Content Include="images\deadpool2.jpg" />
     <Content Include="images\drama.png" />

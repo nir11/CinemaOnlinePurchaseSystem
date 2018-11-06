@@ -4,23 +4,29 @@
     <meta charset="utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
+    <link href="../Content/MenuSheet.css" rel="stylesheet" />
+    <link href="../Content/MovieDivSheet.css" rel="stylesheet" />
 
     <title></title>
 
     <style>
         body {
-            background-image: url('../images/background.jpeg');
-        }
-        table{
-            margin:50px; 
-            float:right;
+            /*background-image: url('../images/background.jpeg');*/          
         }
 
-        #fields{
-            font-weight:bold;
-            padding-right:5px;
+        table {
+            margin: 100px;
+            float: right;
         }
-        #name, #genre, #length, #seats, #year, #date, #hall_num {
+
+        #fields {
+            font-weight: bold;
+            padding-right: 5px;
+            padding-left: 5px;
+            font-size: 20px;
+        }
+
+        #name_input, #genre_input, #length_input, #seats_input, #year_input, #date_input, #hall_num_input {
             width: 100%;
         }
 
@@ -50,21 +56,21 @@
             text-shadow: 0px 1px 0px #3d768a;
         }
 
-        .save_btn:hover {
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
-            background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
-            background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
-            background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
-            background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
-            background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
-            background-color: #408c99;
-        }
+            .save_btn:hover {
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
+                background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+                background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+                background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+                background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+                background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+                background-color: #408c99;
+            }
 
-        .save_btn:active {
-            position: relative;
-            top: 1px;
-        }
+            .save_btn:active {
+                position: relative;
+                top: 1px;
+            }
 
         .reset {
             -moz-box-shadow: 3px 4px 0px 0px #899599;
@@ -151,274 +157,85 @@
                 top: 1px;
             }
 
-        img {
-            height: 250px;
-            display: block;
-            margin: auto;
-            margin-bottom: 3px;
-        }
-        h1 {
-            color: #217969;
-            font-family: 'Helvetica Neue', sans-serif;
-            font-size: 18px;
-            font-weight: bold;
-            /*letter-spacing: 3px;*/
-            text-align: center;
-            text-shadow: #53b4a2 1px 1px;
-            padding-right: 30px;
-        }
-
-        .genre {
-            float: right;
-            border-radius: 5px 5px 5px 5px;
-            margin-right: -1px;
-            margin-top: -1px;
-            color: white;
-            float: right;
-            font-family: Enriqueta,Arial,sans-serif;
-            text-transform: uppercase;
-            font-size: 14px;
-            padding: 3px 10px;
-            border: 1px solid #000000;
-            font-weight: bold;
-            background-size: 20px;
-            background-repeat: no-repeat;
-            padding-left: 30px;
-        }
-
-        #drama {
-            background-color: #605833;
-            background-image: url('../images/drama.png');
-        }
-
-        #horror {
-            background-color: maroon;
-            background-image: url('../images/horror.png');
-        }
-
-        #action {
-            background-color: darkblue;
-            background-image: url('../images/action.png');
-        }
-
-        #comedy {
-            background-color: lime;
-            background-image: url('../images/comedy.png');
-        }
-
-        #romance {
-            background-color: red;
-            background-image: url('../images/romance.png');
-        }
-
-        #science_fiction {
-            background-color: sandybrown;
-            background-image: url('../images/science_fiction.png');
-        }
-
-        #thriller {
-            background-color: darkslategray;
-            background-image: url('../images/thriller.png');
-        }
-
-
-
-        .circle {
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%); /*border: 3px solid red;*/
-            float: left;
-            margin-left: -30px;
-            margin-top: -30px;
-            -moz-border-radius: 50%;
-            -webkit-border-radius: 50%;
-            text-align: center;
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-
-        .movie_div {
-            float:left;
-            width: 300px;
-            height: 450px;
-            border: solid black 2px;
-            border-radius: 15px;
-            margin-top:50px;
-            margin-left:300px;
-            background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0,0,0,.05) 100%);
-            -webkit-transition: 0.3s all;
-            background-size: 4px 4px;
-            -webkit-box-shadow: 0px 0px 15px 10px #00b8ff;
-            -moz-box-shadow: 0px 0px 15px 10px #00b8ff;
-            box-shadow: 0px 0px 15px 10px #00b8ff;
-            border: 1px dashed #046ca3;
-        }
-
-            .movie_div:hover {
-                background-color: lightblue;
-            }
-
-        .movie_data_span {
-            font-weight: bold;
-            text-decoration: underline;
-            margin-right: 50px;
-            color: black;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 300;
-            line-height: 10px;
-            font-weight: bold;
-        }
-
-        .date_time {
-            color: white;
-            font-weight: bold;
-        }
-
-        #date_preview {
-            font-size: 18px;
-        }
-
-        #time_preview {
-            font-style: italic;
-            font-size: 14px;
-        }
-        .buttons_div {
-            float: right;
-            margin-top: 5px;
-            margin-right: 45px;
-        }
-
-        .right_button, .left_button {
-            -moz-box-shadow: inset 0px 1px 0px 0px #f29c93;
-            -webkit-box-shadow: inset 0px 1px 0px 0px #f29c93;
-            box-shadow: inset 0px 1px 0px 0px #f29c93;
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
-            background: -moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-            background: -webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-            background: -o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-            background: -ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-            background: linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
-            background-color: #fe1a00;
-            -moz-border-radius: 6px;
-            -webkit-border-radius: 6px;
-            border-radius: 6px;
-            border: 1px solid #d83526;
-            display: inline-block;
-            cursor: pointer;
-            color: #ffffff;
-            font-family: Arial;
-            font-size: 15px;
-            font-weight: bold;
-            padding: 6px 24px;
-            text-decoration: none;
-            text-shadow: 0px 1px 0px #b23e35;
-        }
-
-            .right_button:hover, .left_button:hover {
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
-                background: -moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: -webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: -o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: -ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
-                background-color: #ce0100;
-            }
-
-        .right_button {
-            margin-left: 10px;
-        }
-
-        .left_button {
-            margin-right: 10px;
-        }
-
-        .cart {
-            position: relative;
-            left: 0;
-            width: 40px;
-            height: 40px;
-            margin-left: 20px;
-        }
+     
     </style>
 
     <script>
         $(document).ready(function () {
 
             let today = new Date().toISOString().substr(0, 16);
-            $("#date").val(today);
+            $("#date_input").val(today);
 
-         
+            $("#name_input").keyup(function() {
+                $("#name").html($("#name_input").val());
+            })
+           
+
+            $("#genre_input").change(function () {    
+                $("#genre").html($("#genre_input").find(":selected").text());
+                setGenreColor();
+            })
+            $("#year_input").keyup(function () {
+                $("#year").html($("#year_input").val());
+            })
+            $("#length_input").keyup(function () {
+                $("#length").html($("#length_input").val());
+            })
+            $("#file_input").change(function () {
+                var rdr = new FileReader();
+                rdr.readAsDataURL($("#file_input")[0].files[0]);
+                rdr.onload = function () {
+
+                    $("#img").attr('src', rdr.result);
+                }
+            })
+            $("#date_input").keyup(function () {
+                let date = $("#date_input").val();
+                $("#date").html(date.substring(5, 10).split("-").reverse().join("/"));
+                $("#time").html(date.substring(11, 16));
+
+            })
+            $("#seats_input").keyup(function () {
+                $("#seats").html($("#seats_input").val());
+            })
 
             $("#preview").click(function () {
 
                 $("#movie_div").css("visibility", "visible");
 
-                $("#genre_preview").html($("#genre").find(":selected").text());
+                $("#genre").html($("#genre_input").find(":selected").text());
                 setGenreColor();
 
-                let date = $("#date").val();               
-                $("#date_preview").html(date.substring(5, 10).split("-").reverse().join("/"));
-                $("#time_preview").html(date.substring(11, 16));
-                $("#name_preview").html($("#name").val());
-                $("#year_preview").html($("#year").val());
-                $("#length_preview").html($("#length").val());
-                $("#seats_preview").html($("#seats").val());
+                let date = $("#date_input").val();
+                $("#date").html(date.substring(5, 10).split("-").reverse().join("/"));
+                $("#time").html(date.substring(11, 16));
+                $("#name").html($("#name_input").val());
+                $("#year").html($("#year_input").val());
+                $("#length").html($("#length_input").val());
+                $("#seats").html($("#seats_input").val());
                 var rdr = new FileReader();
-                rdr.readAsDataURL($("#file")[0].files[0]);
+                rdr.readAsDataURL($("#file_input")[0].files[0]);
                 rdr.onload = function () {
-              
-                    $("#img_preview").attr('src', rdr.result);
+
+                    $("#img").attr('src', rdr.result);
                 }
-        
+
             })
 
             $("input[type='reset']").closest('form').on('reset', function (event) {
 
                 // executes before the form has been reset
-                $("#movie_div").css("visibility", "hidden");
+                //$("#movie_div").css("visibility", "hidden");
+                location.href = "AdminPage.html";
 
-           
+
             });
 
-        })
-
-        function addNewMovie() {
-
-
-            let form = new FormData();
-
-            form.append('name', $("#name").val());
-            form.append('date', $("#date").val());
-            form.append('year', $("#year").val());
-            form.append('genre', $("#genre").find(":selected").text());
-
-            form.append('length', $("#length").val());
-            form.append('seats', $("#seats").val());
-
-            form.append('img', $("#file")[0].files[0].FileName);
-
-
-            $.ajax({
-                url: "/api/movie",
-                method: "POST",
-                data: form,
-                contentType: false,
-                processData: false,
-
-                success: function (data) {                          	 		//פונקציה  שתופעל לאחר הצלחה
-                    alert("success");
-                },
-                error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
-                    //console.log(err);
-                    alert("error");
-                }
-
+            $("#save").click(function () {
+                addNewMovieToDataBase();
             })
-        }
+
+        })
 
         function setGenreColor() {
 
@@ -449,10 +266,53 @@
             }
         }
 
+        function addNewMovieToDataBase() {
+            let form = new FormData();
+
+            form.append('name', $("#name_input").val());
+            form.append('date', $("#date_input").val());
+            form.append('year', $("#year_input").val());
+            form.append('genre', $("#genre_input").find(":selected").text());
+
+            form.append('length', $("#length_input").val());
+            form.append('seats', $("#seats_input").val());
+
+            form.append('img', $("#file_input")[0].files[0]);
+
+            // Theater details
+            form.append('hall_num', $("#hall_num_input").val());
+
+
+            $.ajax({
+                url: "/api/movie",
+                method: "POST",
+                data: form,
+                contentType: false,
+                processData: false,
+
+                success: function (data) {                          	 		//פונקציה  שתופעל לאחר הצלחה
+                    alert("הסרט נשמר בטבלת Movies");
+                },
+                error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
+                    //console.log(err);
+                    alert("error");
+                }
+
+            })
+        }
+
+
     </script>
 
 </head>
 <body dir="rtl">
+
+    <ul>
+        <li><a href="MoviesPage.html">הזמנת סרט</a></li>
+        <li><a href="#news">היסטורית הזמנות</a></li>
+        <li><a class="active"  href="AdminPage.html">הוספת סרט - Admin</a></li>
+    </ul>
+
     <form>
         <table>
             <!--name-->
@@ -461,7 +321,7 @@
                     <span>שם: </span>
                 </td>
                 <td>
-                    <input type="text" id="name" />
+                    <input type="text" id="name_input" />
                 </td>
             </tr>
             <!--genre-->
@@ -470,7 +330,7 @@
                     <span>ז'אנר: </span>
                 </td>
                 <td>
-                    <select id="genre">
+                    <select id="genre_input">
                         <option selected>בחר</option>
                         <option>אימה</option>
                         <option>דרמה</option>
@@ -488,7 +348,7 @@
                     <span>שנת הוצאה: </span>
                 </td>
                 <td>
-                    <input type="number" id="year" />
+                    <input type="number" id="year_input" />
                 </td>
             </tr>
             <!--length-->
@@ -497,7 +357,7 @@
                     <span>מספר דקות: </span>
                 </td>
                 <td>
-                    <input type="number" id="length" />
+                    <input type="number" id="length_input" />
                 </td>
             </tr>
             <!--file-->
@@ -506,7 +366,7 @@
                     <span>תמונה: </span>
                 </td>
                 <td>
-                    <input type="file" id="file" />
+                    <input type="file" id="file_input" />
                     <br />
                 </td>
             </tr>
@@ -516,7 +376,7 @@
                     <span>תאריך ההקרנה: </span>
                 </td>
                 <td>
-                    <input type="datetime-local" id="date" />
+                    <input type="datetime-local" id="date_input" />
                     <br />
                 </td>
             </tr>
@@ -526,7 +386,7 @@
                     <span>מספר אולם: </span>
                 </td>
                 <td>
-                    <input type="number" id="hall_num" />
+                    <input type="number" id="hall_num_input" />
                     <br />
                 </td>
             </tr>
@@ -537,14 +397,14 @@
                     <span>מספר הכיסאות: </span>
                 </td>
                 <td>
-                    <input type="number" id="seats" />
+                    <input type="number" id="seats_input" />
                     <br />
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="button" class="save_btn" id="save" value="שמירה" onclick="addNewMovie()" />
+                    <input type="button" class="save_btn" id="save" value="שמירה" />
                     <input type="reset" class="reset" value="איפוס" />
                     <input type="button" class="preview_btn" id="preview" value="תצוגה מקדימה" />
                 </td>
@@ -552,37 +412,29 @@
 
         </table>
 
-        <div class="movie_div" id="movie_div" style="visibility:hidden">
-            <span class="genre" id="genre_preview"></span>
+        <div class="movie_div" id="movie_div" style="visibility:hidden; float:left; margin-left:250px" >
+            <span class="genre" id="genre"> </span>
             <br />
             <div class="circle">
+                <span class="date_time" id="date"></span>
                 <br />
-                <span class="date_time" id="date_preview"></span>
-                <br />
-                <span class="date_time" id="time_preview"></span>
+                <span class="date_time" id="time"></span>
             </div>
-            <h1 id="name_preview"></h1>
-            <img id="img_preview" />
+            <h1 id="name"></h1>
+            <img id="img" />
             <span class="movie_data_span">שנה: </span>
-            <span id="year_preview"></span>
+            <span id="year"></span>
             <br />
             <span class="movie_data_span">מספר דקות: </span>
-            <span id="length_preview"></span>
+            <span id="length"></span>
             <br />
             <span class="movie_data_span">מקומות פנויים: </span>
-            <span id="seats_preview"></span>
+            <span id="seats"></span>
             <br />
-            <span class="movie_data_span">רכישת כרטיסים : </span>
-            <div class="buttons_div">
-                <input type="button" value="+" class="right_button" />
-                <span>0</span>
-                <input type="button" value="-" class="left_button" />
-            </div>
-            <a>
-                <img class="cart" src="../images/cart.png" />
-            </a>
+            <input type="button" value="רכישת כרטיסים" class="purchase_btn"/>
+    
         </div>
-        
+
     </form>
 
 

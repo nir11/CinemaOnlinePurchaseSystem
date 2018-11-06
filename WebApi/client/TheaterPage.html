@@ -11,7 +11,7 @@
         body {
             background: #111;
         }
-        img {
+        #cinema_screen {
             position: absolute;
             margin-top: 20px;
             height: 240px;
@@ -21,16 +21,62 @@
             width: 50%;
         }
 
+        .returnBtn {
+            margin-left: 30px;
+            margin-top: 30px;
+            -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+            -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+            box-shadow: inset 0px 1px 0px 0px #ffffff;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+            background: -moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background: -webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background: -o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background: -ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
+            background-color: #ededed;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            border: 1px solid #dcdcdc;
+            display: inline-block;
+            cursor: pointer;
+            color: #777777;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #ffffff;
+        }
+
+        .returnBtn:hover {
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+            background: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+            background-color: #dfdfdf;
+        }
+
+            .returnBtn:active {
+                position: relative;
+                top: 1px;
+            }
+
+
         #movie_div {
             direction: rtl;
             float: right;
-            width:200px;
+            width: 200px;
             margin: 30px;
-            -webkit-box-shadow: 0px 0px 50px 30px #ff0000;
-            -moz-box-shadow: 0px 0px 50px 30px #ff0000;
-            box-shadow: 0px 0px 50px 30px #ff0000;
+            -webkit-box-shadow: 0px 0px 35px 17px #809c16;
+            -moz-box-shadow: 0px 0px 35px 17px #809c16;
+            box-shadow: 0px 0px 35px 17px #809c16;
             padding: 5px;
-            padding-right:10px;
+            padding-right: 10px;
             border-width: 5px;
             border-style: solid;
             border-color: #32745e;
@@ -159,6 +205,7 @@
             transform: skew(20deg);
             margin-top: -32px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            
         }
 
         .avail {
@@ -303,22 +350,75 @@
 
         $(document).ready(function () {
 
+            arr = "";
             movie = JSON.parse(localStorage.getItem("movie"));
-
             $("#movie_name").text(movie.name);
             $hallNum = $("#hall_number").val();
             $("#date").text(movie.date);
             $("#time").text(movie.time);
+            $("#avail_seats_amount").text(movie.avail_seats_amount);
             userSeatsAmount = 0
             $ticketsAmount = $("#tickets_amount").text(userSeatsAmount);
             seats = "";
             $seatPositions = $("#seat_positions").text(seats);
-            //==============================================
-            $currentMovie = 13;
+
+            getMovieSeatsFromDataBase(movie.number);  
+
+
+
+            //סימון המקומות ע"י הלקוח
+            $('.cinema-seats .seat').on('click', function () {
+                $(this).toggleClass('active');
+
+                if ($(this).hasClass("active")) {
+                    if (userSeatsAmount == 6) {
+                        alert("לא ניתן להזמין יותר מ-6 כרטיסים");
+                        $(this).toggleClass('active');
+                    }
+                    else {
+                        minusTicket();
+                        userSeatsAmount = userSeatsAmount + 1;
+                        $ticketsAmount.text(userSeatsAmount);
+                        if (userSeatsAmount == 1) {
+                            seats = event.target.id;
+                        }
+                        else {
+                            seats = seats + " " + event.target.id;
+                        }
+                        $seatPositions.text(seats);
+                    }
+                }
+                else {
+                    plusTicket();
+                    userSeatsAmount = userSeatsAmount - 1;
+                    $ticketsAmount.text(userSeatsAmount);
+                    var text = $seatPositions.text();
+                    seats = text.replace(event.target.id, '');
+                    $seatPositions.text(seats);
+                }
+
+            });
+
+
+            $("#purchase_btn").click(function () {
+
+                updateNewOrderInDataBase();
+                updateTheaterDataBase(seats, userSeatsAmount);
+                updareMoviesDateBase(userSeatsAmount);
+                location.href = "MoviesPage.html";
+            })
+
+            $(".returnBtn").click(function () {
+                location.href = "MoviesPage.html";
+            })
+                        
+        })
+
+        function getMovieSeatsFromDataBase(num) {
 
             $.ajax({
                 dataType: "json",	    		                           		 //סוג הנתונים שאנחנו מצפים לקבל מהשרת
-                url: "/api/theater/2/" + $currentMovie,
+                url: "/api/theater/2/" + parseInt(num),
                 contentType: "application/json; charset=utf-8",	               //סוג הנתונים שאנחנו שולחים לשרת
                 method: "GET",			                        	               //סוג הפעולה		
                 //data: JSON.stringify(data to send goes here),			//הנתונים עצמם שאנחנו שולחים
@@ -327,7 +427,7 @@
 
                     if (data) {
                         $("#hall_number").text(data.hall_num);
-                        var arr = data.avail_seats_arr;
+                        arr = data.avail_seats_arr;
                         for (var i in arr) {
                             if (arr[i] == 1)
                                 setAsTakenSeat(parseInt(i) + 1);
@@ -342,105 +442,110 @@
                 error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
                     alert("error");
                 }
-            });          
-
-            //סימון המקומות ע"י הלקוח
-            $('.cinema-seats .seat').on('click', function () {
-                $(this).toggleClass('active');
-
-                if ($(this).hasClass("active")) {
-                    if (userSeatsAmount == 6) {
-                        alert("לא ניתן להזמין יותר מ-6 כרטיסים");
-                        $(this).toggleClass('active');
-                    }
-                    else {
-                        userSeatsAmount = userSeatsAmount + 1;
-                        $ticketsAmount.text(userSeatsAmount);
-                        seats = seats + " " + event.target.id;
-                        $seatPositions.text(seats);
-                    }
-                }
-                else {
-                    userSeatsAmount = userSeatsAmount - 1;
-                    $ticketsAmount.text(userSeatsAmount);
-                    var text = $seatPositions.text();
-                    seats = text.replace(event.target.id, '');
-                    $seatPositions.text(seats);
-                }
-
-            });
-
-
-            $("#purchase_btn").click(function () {
-             
-                updateNewOrderInDataBase();
-                //location.href = "MoviesPage.html";
-            })
-
-                        
-        })
+            });    
+        }
 
         function setAsTakenSeat(position) {
 
             if (position <= 16) {
                 if (position <= 8)
-                    $("#A" + position).toggleClass('taken').unbind("click");
+                    $("#A" + position).toggleClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#A" + position).addClass('taken').unbind("click");
+                $("#A" + position).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
             }
             else if (position >= 17 && position <= 32) {
                 if (position <= 24)
-                    $("#B" + (position - 16)).addClass('taken').unbind("click");
+                    $("#B" + (position - 16)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#B" + (position - 16)).addClass('taken').unbind("click");
+                    $("#B" + (position - 16)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
             }
             else if (position >= 33 && position <= 48) {
                 if (position <= 40)
-                    $("#C" + (position - 32)).addClass('taken').unbind("click");
+                    $("#C" + (position - 32)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#C" + (position - 32)).addClass('taken').unbind("click");
+                $("#C" + (position - 32)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
             }
             else if (position >= 49 && position <= 64) {
                 if (position <= 56)
-                    $("#D" + (position - 48)).addClass('taken').unbind("click");
+                    $("#D" + (position - 48)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#D" + (position - 48)).addClass('taken').unbind("click");
+                $("#D" + (position - 48)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
             }
             else if (position >= 65 && position <= 80) {
                 if (position <= 72)
-                    $("#E" + (position - 64)).addClass('taken').unbind("click");
+                    $("#E" + (position - 64)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#E" + (position - 64)).addClass('taken').unbind("click");
+                $("#E" + (position - 64)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
             }
             else if (position >= 81 && position <= 96) {
                 if (position <= 88)
-                    $("#F" + (position - 80)).addClass('taken').unbind("click");
+                    $("#F" + (position - 80)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#F" + (position - 80)).addClass('taken').unbind("click");
+                $("#F" + (position - 80)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
             }
             else if (position >= 97 && position <= 112) {
                 if (position <= 104)
-                    $("#G" + (position - 96)).addClass('taken').unbind("click");
+                    $("#G" + (position - 96)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#G" + (position - 96)).addClass('taken').unbind("click");
+                $("#G" + (position - 96)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
             }
             else if (position >= 113 && position <= 128) {
                 if (position <= 120)
-                    $("#H" + (position - 112)).addClass('taken').unbind("click");
+                    $("#H" + (position - 112)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#H" + (position - 112)).addClass('taken').unbind("click");
+                $("#H" + (position - 112)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
             }
             else if (position >= 129 && position <= 144) {
                 if (position <= 136)
-                    $("#I" + (position - 128)).addClass('taken').unbind("click");
+                    $("#I" + (position - 128)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#I" + (position - 128)).addClass('taken').unbind("click");
+                $("#I" + (position - 128)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
             }
             else if (position >= 145 && position <= 160) {
                 if (position <= 152)
-                    $("#J" + (position - 144)).addClass('taken').unbind("click");
+                    $("#J" + (position - 144)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
                 else
-                    $("#J" + (position - 144)).addClass('taken').unbind("click");
+                $("#J" + (position - 144)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
             }
         }
 
@@ -508,6 +613,25 @@
             }
         }
 
+        function plusTicket() {
+
+            var newSeatsAmount = parseInt($("#avail_seats_amount").text()) + 1;
+            $("#avail_seats_amount").text(newSeatsAmount)
+              //$cart.show();
+        }
+
+        function minusTicket() {
+
+            var currentAmount = parseInt($("#avail_seats_amount").text());
+            if (currentAmount > 0) {
+                currentAmount = currentAmount - 1;
+                $("#avail_seats_amount").text(currentAmount)              
+            }
+            if (currentAmount == 0) {
+                //$cart.hide();
+            }
+        }
+
         function updateNewOrderInDataBase() {
 
             $.ajax({
@@ -517,33 +641,154 @@
                 contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
                 type: "POST",				                         //סוג הפעולה		
                 data: JSON.stringify(seats),			                 //הנתונים עצמם שאנחנו שולחים
-                success: function (data) {                       //פונקציה  שתופעל לאחר הצלחה
+                success: function () {                       //פונקציה  שתופעל לאחר הצלחה
                     alert("ההזמנה בוצעה!");
                 },
-                error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
+                error: function () {                            			//פונקציה שתופעל במקרה של שגיאה
                     alert("error");
                 }
             });
         }
 
-       
+        function updareMoviesDateBase(userSeatsAmount) {
+
+            // עדכון מספר הכיסאות הפנויים החדש בטבלת Movies
+            $.ajax({
+                dataType: "json",			                         //סוג הנתונים שאנחנו מצפים לקבל מהשרת
+                url: "/api/movie/" + movie.number + "/" + userSeatsAmount,			                 //הכתובת לשרת ולפונקציה
+                contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
+                type: "PUT",				                         //סוג הפעולה		
+                //data: JSON.stringify(),			                 //הנתונים עצמם שאנחנו שולחים
+                success: function () {                       //פונקציה  שתופעל לאחר הצלחה
+
+                    alert("מספר הכיסאות הפנויים עודכנו ");
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+        function updateTheaterDataBase(seats, userSeatsAmount) {
+
+            var jumps = 3;
+            var currentLength;
+            for (i = 0; i < userSeatsAmount; i++) {
+                if (i < userSeatsAmount - 1) {
+                    currentLength = parseInt(seats.indexOf(" "));
+                    //alert(currentLength);
+                    //alert(seats.slice(0, currentLength));
+                    findPositionOnArr(seats.slice(0, currentLength), currentLength);
+                }
+                else {
+                    currentLength = parseInt(seats.length);
+                    //alert(currentLength);
+                    //alert(seats.slice(0, currentLength));
+                    findPositionOnArr(seats.slice(0, currentLength), currentLength);
+                }               
+                seats = seats.substring(seats.indexOf(" ") + 1);
+                //alert(seats);
+            }
+            //alert(arr);
+            $num = movie.number;
+            $a = arr;
+                // עדכון הכיסאות באולם הקולנוע
+                $.ajax({
+                    dataType: "json",			                         //סוג הנתונים שאנחנו מצפים לקבל מהשרת
+                    url: "/api/theater/" + $num + "/" + $a,			                 //הכתובת לשרת ולפונקציה
+                    contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
+                    type: "PUT",				                         //סוג הפעולה		
+                    //data: JSON.stringify(),			                 //הנתונים עצמם שאנחנו שולחים
+                    success: function () {                       //פונקציה  שתופעל לאחר הצלחה
+                        alert("אולם הקולנוע עודכן");
+                    },
+                    error: function () {
+                        alert("error");
+
+                    }
+                });
+
+
+           
+        }
+
+        function findPositionOnArr(currentSeat, currentLength) {
+            alert(currentSeat.slice(0, 1));
+            alert(currentSeat.slice(1, currentLength));
+
+            // שורה A
+            if (currentSeat.slice(0, 1) == "A") {
+                arr = replaceAt(currentSeat.slice(1, currentLength), "1");
+                //alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "B") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 16, "1");
+                //alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "C") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 32, "1");
+               // alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "D") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 48, "1");
+               // alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "E") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 64, "1");
+                //alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "F") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 80, "1");
+                //alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "G") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 96, "1");
+                //alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "H") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 112, "1");
+                //alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "I") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 128, "1");
+                //alert(arr);
+            }
+            else if (currentSeat.slice(0, 1) == "J") {
+                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 144, "1");
+                //alert(arr);
+            }
+        }
+
+        function replaceAt(position, newChar) {
+            var pos = position - 1;
+            return arr.substr(0, pos) + newChar + arr.substr(pos + 1);
+            //return arr.substring(0, position-1) + newChar + arr.substring(position + 1);
+        }
+
+     
+
     </script>
 
 </head>
 
 
 <body>
-    <img src="../images/cinema_screen.jpg" />
+    <img id="cinema_screen" src="../images/cinema_screen.jpg" />
+    <input type="button" class="returnBtn" value="חזרה" onclick="returnBtn()"/>
+ 
     <div id="movie_div">
         <h1 id="movie_name"></h1>
-        <span class="movie_details_headers">אולם:</span>
-        <span class="movie_details" id="hall_number"></span>
-        <br />
         <span class="movie_details_headers">תאריך:</span>
         <span class="movie_details" id="date">0</span>
         <br />
         <span class="movie_details_headers">שעה:</span>
         <span class="movie_details" id="time">0</span>
+        <br />
+        <span class="movie_details_headers">אולם:</span>
+        <span class="movie_details" id="hall_number"></span>
+        <br />
+        <span class="movie_details_headers">מקומות פנויים:</span>
+        <span class="movie_details" id="avail_seats_amount"></span>
         <br />
         <span class="movie_details_headers">כרטיסים להזמנה:</span>
         <span class="movie_details" id="tickets_amount"></span>

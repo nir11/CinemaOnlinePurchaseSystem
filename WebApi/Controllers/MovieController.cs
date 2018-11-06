@@ -49,9 +49,20 @@ namespace WebApi.Controllers
 
         }
 
+
+
+        // POST api/<controller>        
+        [HttpGet]
+        [Route("api/movie/{name}/{s}")]
+        public int getMovieByName(string name, string s)
+        {
+            CinemaDB db = new CinemaDB();
+            Movies m = db.Movies.SingleOrDefault(x => x.name.Equals(name));
+            return m.number;
+        }
+
         // POST api/<controller>
-        [HttpPost]
-        public void setNewMovie()
+        public void Post()
         {
 
             Movies movie = new Movies();
@@ -63,9 +74,15 @@ namespace WebApi.Controllers
             movie.seats = Convert.ToInt32(HttpContext.Current.Request.Params["seats"]);
 
             HttpPostedFile file = HttpContext.Current.Request.Files["img"];
-            string ext = Path.GetExtension(file.FileName);      
+            //string ext = Path.GetExtension(file.FileName);      
             file.SaveAs(HttpContext.Current.Server.MapPath("~") + "/images/" + file.FileName);
             movie.movie_img_url = "/images/" + file.FileName;
+
+            Theaters theater = new Theaters();
+            theater.hall_num = Convert.ToInt32(HttpContext.Current.Request.Params["hall_num"]);
+            theater.avail_seats_arr = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+
+            movie.Theaters.Add(theater);
 
             CinemaDB db = new CinemaDB();
             db.Movies.Add(movie);
@@ -74,7 +91,7 @@ namespace WebApi.Controllers
 
         // PUT api/<controller>/5
         [Route("api/movie/{movieNumber}/{userAmountSeats}")]
-        public void Put(int movieNumber, string seats)
+        public void Put(int movieNumber, string userAmountSeats)
         {
             CinemaDB db = new CinemaDB();
 
@@ -82,7 +99,8 @@ namespace WebApi.Controllers
 
             if (movie != null)
             {
-                movie.seats = Convert.ToInt32(seats);
+                int? oldAmount = movie.seats;
+                movie.seats = oldAmount- Convert.ToInt32(userAmountSeats);
                 db.SaveChanges();
             }          
         }

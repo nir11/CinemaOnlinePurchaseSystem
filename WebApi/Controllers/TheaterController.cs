@@ -34,13 +34,31 @@ namespace WebApi.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [Route("api/theater/{movieNum}")]
+        public void Post(int movieNum, [FromBody]int hallNum)
         {
+            Theaters theater = new Theaters();
+            theater.movie_number = movieNum;
+            theater.hall_num = hallNum;
+            theater.avail_seats_arr = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+            CinemaDB db = new CinemaDB();
+            db.Theaters.Add(theater);
+            db.SaveChanges();
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [Route("api/theater/{movieNumber}/{newSeatsArr}")]
+        public void Put(int movieNumber, string newSeatsArr)
         {
+            CinemaDB db = new CinemaDB();
+
+            Theaters theater = db.Theaters.SingleOrDefault(x => x.movie_number == movieNumber);
+
+            if (theater != null)
+            {
+                theater.avail_seats_arr = newSeatsArr;
+                db.SaveChanges();
+            }
         }
 
         // DELETE api/<controller>/5

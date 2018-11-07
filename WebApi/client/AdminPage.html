@@ -171,9 +171,10 @@
             })
            
 
-            $("#genre_input").change(function () {    
-                $("#genre").html($("#genre_input").find(":selected").text());
-                setGenreColor();
+            $("#genre_input").change(function () {
+               $(".genre").text($(this).find("option:selected").val());
+                alert($(this).find("option:selected").val());
+                changeGenreColor();
             })
             $("#year_input").keyup(function () {
                 $("#year").html($("#year_input").val());
@@ -202,25 +203,7 @@
             $("#preview").click(function () {
 
                 $("#movie_div").css("visibility", "visible");
-
-                $("#genre").html($("#genre_input").find(":selected").text());
-                setGenreColor();
-
-                let date = $("#date_input").val();
-                $("#date").html(date.substring(5, 10).split("-").reverse().join("/"));
-                $("#time").html(date.substring(11, 16));
-                $("#name").html($("#name_input").val());
-                $("#year").html($("#year_input").val());
-                $("#length").html($("#length_input").val());
-                $("#seats").html($("#seats_input").val());
-                var rdr = new FileReader();
-                rdr.readAsDataURL($("#file_input")[0].files[0]);
-                rdr.onload = function () {
-
-                    $("#img").attr('src', rdr.result);
-                }
-
-            })
+            });
 
             $("input[type='reset']").closest('form').on('reset', function (event) {
 
@@ -237,11 +220,10 @@
 
         })
 
-        function setGenreColor() {
+        function changeGenreColor() {
 
-            $genreSpan = $(".genre");
-
-            switch ($genreSpan.html()) {
+            var $genreSpan = $(".genre");
+            switch ($genreSpan.text()) {
                 case "קומדיה":
                     $genreSpan.attr("id", "comedy");
                     break;

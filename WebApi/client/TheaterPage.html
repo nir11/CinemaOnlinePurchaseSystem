@@ -487,100 +487,17 @@
 
         function setAsTakenSeat(position) {
 
-            if (position <= 16) {
-                    $("#A" + position).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
- 
-            }
-            else if (position >= 17 && position <= 32) {
-                    $("#B" + (position - 16)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-   
-            }
-            else if (position >= 33 && position <= 48) {
-                    $("#C" + (position - 32)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-  
-            }
-            else if (position >= 49 && position <= 64) {
-                    $("#D" + (position - 48)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-    
-            }
-            else if (position >= 65 && position <= 80) {
-                    $("#E" + (position - 64)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });         
-            }
-            else if (position >= 81 && position <= 96) {
-                    $("#F" + (position - 80)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-       
-            }
-            else if (position >= 97 && position <= 112) {
-                    $("#G" + (position - 96)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-            
-            }
-            else if (position >= 113 && position <= 128) {
-                    $("#H" + (position - 112)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-           
-            }
-            else if (position >= 129 && position <= 144) {
-                    $("#I" + (position - 128)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-             
-            }
-            else if (position >= 145 && position <= 160) {
-                    $("#J" + (position - 144)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
-              
-            }
+            var cSeat = '#' + String.fromCharCode((parseInt(position / 16) + 'A'.charCodeAt(0))) + parseInt(position % 16);
+            $(cSeat).toggleClass('taken').unbind("click").click(function () {
+                alert("כיסא תפוס");
+            });
         }
 
         function setAsAvailSeat(position) {
 
-            if (position <= 16) {
-                    $("#A" + position).addClass('avail');
-                       }
-            else if (position >= 17 && position <= 32) {
-                    $("#B" + (position - 16)).addClass('avail');
-                   }
-            else if (position >= 33 && position <= 48) {
-                    $("#C" + (position - 32)).addClass('avail');
-                 }
-            else if (position >= 49 && position <= 64) {
-                    $("#D" + (position - 48)).addClass('avail');
-               }
-            else if (position >= 65 && position <= 80) {
-                    $("#E" + (position - 64)).addClass('avail');
-            }
-            else if (position >= 81 && position <= 96) {
-                    $("#F" + (position - 80)).addClass('avail');
-              }
-            else if (position >= 97 && position <= 112) {
-                    $("#G" + (position - 96)).addClass('avail');
-             }
-            else if (position >= 113 && position <= 128) {
-                    $("#H" + (position - 112)).addClass('avail');
-             }
-            else if (position >= 129 && position <= 144) {
-                    $("#I" + (position - 128)).addClass('avail');
-             }
-            else if (position >= 145 && position <= 160) {
-                    $("#J" + (position - 144)).addClass('avail');
-              }
-        }
+            var cSeat = '#' + String.fromCharCode((parseInt(position / 16) + 'A'.charCodeAt(0))) + parseInt(position % 16);
+            $(cSeat).addClass('avail');
+        }
 
         function plusTicket() {
 
@@ -682,53 +599,12 @@
         }
 
         function findPositionOnArr(currentSeat, currentLength) {
-
             alert(currentSeat.slice(0, 1));
             alert(currentSeat.slice(1, currentLength));
 
-            // שורה A
-            if (currentSeat.slice(0, 1) == "A") {
-                arr = replaceAt(currentSeat.slice(1, currentLength), "1");
-                //alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "B") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 16, "1");
-                //alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "C") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 32, "1");
-               // alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "D") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 48, "1");
-               // alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "E") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 64, "1");
-                //alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "F") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 80, "1");
-                //alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "G") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 96, "1");
-                //alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "H") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 112, "1");
-                //alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "I") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 128, "1");
-                //alert(arr);
-            }
-            else if (currentSeat.slice(0, 1) == "J") {
-                arr = replaceAt(parseInt(currentSeat.slice(1, currentLength)) + 144, "1");
-                //alert(arr);
-            }
-        }
-
+            var curSeat = parseInt(currentSeat.slice(1, currentLength)) + (currentSeat.charCodeAt(0) - 'A'.charCodeAt(0)) * 16;
+            arr = replaceAt(parseInt(curSeat), "1");
+        }
         function replaceAt(position, newChar) {
             var pos = position - 1;
             return arr.substr(0, pos) + newChar + arr.substr(pos + 1);

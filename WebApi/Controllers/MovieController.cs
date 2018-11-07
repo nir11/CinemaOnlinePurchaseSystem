@@ -81,7 +81,7 @@ namespace WebApi.Controllers
             Theaters theater = new Theaters();
             theater.hall_num = Convert.ToInt32(HttpContext.Current.Request.Params["hall_num"]);
             theater.avail_seats_arr = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-
+            
             movie.Theaters.Add(theater);
 
             CinemaDB db = new CinemaDB();

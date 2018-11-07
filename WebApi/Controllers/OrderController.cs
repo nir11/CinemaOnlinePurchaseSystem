@@ -18,7 +18,7 @@ namespace WebApi.Controllers
             //return new string[] { "value1", "value2" };
             CinemaDB db = new CinemaDB();
 
-            return db.Orders.Select(x => new OrderHistoryDto()
+            return db.Orders.OrderBy(y => y.order_date).Select(x => new OrderHistoryDto()
             {
                 id = x.id,
                 order_date = x.order_date,

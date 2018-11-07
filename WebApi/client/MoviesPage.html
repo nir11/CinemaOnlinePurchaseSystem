@@ -15,6 +15,7 @@
 
 
         body {
+            margin-bottom:30px;
         }
 
         table {
@@ -78,6 +79,37 @@
                 width: 250px;
                 outline: 0;
             }
+        .full_hall {
+            -moz-box-shadow: inset 0px 1px 0px 0px #cf866c;
+            -webkit-box-shadow: inset 0px 1px 0px 0px #cf866c;
+            box-shadow: inset 0px 1px 0px 0px #cf866c;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+            background: -moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background: -webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background: -o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background: -ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+            background-color: #d0451b;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #942911;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 13px;
+            padding: 6px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #854629;
+            margin-right: 90px;
+            margin-top: 8px;
+            font-weight:bold;
+        }
+
+    
+
     </style>
 
 
@@ -152,6 +184,7 @@
 
             });
 
+           
 
         })
 
@@ -198,13 +231,25 @@
             var $seats = $('<span>').html(avail_seats_amount);
             $movieDiv.append($seats);
 
+            
 
 
 
             //===================================================
             $movieDiv.append($('<br />'))
-            var $purchseBtn = $('<input type = "button" value = "רכישת כרטיס">').addClass('purchase_btn');
+            var $purchseBtn = $('<input type = "button">');
+
+            if ($seats.html() == 0) {
+                $purchseBtn.val("האולם מלא!").attr('disabled', 'disabled').addClass("full_hall");
+            }
+            else {
+                $purchseBtn.val("רכישת כרטיסים").addClass("purchase_btn");
+
+            }
             $movieDiv.append($purchseBtn);
+
+
+
             //===================================================
 
             var $cart_link = $('<a>').attr("href", "TheaterPage.html");
@@ -299,12 +344,6 @@
         <li><a href="AdminPage.html">הוספת סרט - Admin</a></li>
     </ul>
 
-    <!--<div id="muenu_div">
-        <input class="menu_btn" type="button" value="רשימת סרטים" />
-        <input class="menu_btn" type="button" value="היסטורית הזמנות" />
-        <input class="menu_btn" type="button" value="הוספת סרט - Admin" />
-
-    </div>-->
     <form action="/search" id="searchbox5">
         <input id="search5" type="text" placeholder="חפש סרט..." />
     </form>

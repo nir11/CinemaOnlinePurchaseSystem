@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="247f88b7e7634f97a014da3dd67d024c" Name="Diagram1" ZoomLevel="91">
         <EntityTypeShape EntityType="CinemaModel.Movies" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemaModel.Orders" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.Orders" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="CinemaModel.FK__Orders__movie_nu__403A8C7D" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CinemaModel.Theaters" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="CinemaModel.Theaters" Width="1.5" PointX="4.75" PointY="3" />
         <AssociationConnector Association="CinemaModel.FK__Theaters__movie___02FC7413" />
       </Diagram>
     </edmx:Diagrams>

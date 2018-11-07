@@ -6,15 +6,27 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using ClassLibrary;
+using WebApi.DTO;
 
 namespace WebApi.Controllers
 {
     public class OrderController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public List<OrderHistoryDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            //return new string[] { "value1", "value2" };
+            CinemaDB db = new CinemaDB();
+
+            return db.Orders.Select(x => new OrderHistoryDto()
+            {
+                id = x.id,
+                order_date = x.order_date,
+                name = x.Movies.name,
+                movie_date = x.Movies.date,
+                user_seats = x.user_seats_amount,
+                user_seats_positions = x.user_seats_positions
+            }).ToList();
         }
 
         // GET api/<controller>/5

@@ -46,6 +46,8 @@ namespace WebApi.Controllers
             db.SaveChanges();
         }
 
+
+
         // PUT api/<controller>/5
         [Route("api/theater/{movieNumber}/{newSeatsArr}")]
         public void Put(int movieNumber, string newSeatsArr)

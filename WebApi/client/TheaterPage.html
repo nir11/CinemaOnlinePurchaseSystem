@@ -11,15 +11,28 @@
         body {
             background: #111;
         }
+
+
         #cinema_screen {
             position: absolute;
             margin-top: 20px;
-            height: 240px;
             display: block;
+            height: 240px;
             margin-left: 25%;
             margin-right: 25%;
             width: 50%;
         }
+
+        #movie_img_on_screen {
+            position: fixed;
+            height: 215px;
+            margin: 30px auto; /* Will not center vertically and won't work in IE6/7. */
+            left: 0;
+            right: 0;
+        }
+
+      
+
 
         .returnBtn {
             margin-left: 30px;
@@ -50,16 +63,16 @@
             text-shadow: 0px 1px 0px #ffffff;
         }
 
-        .returnBtn:hover {
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
-            background: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-            background: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-            background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-            background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-            background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
-            background-color: #dfdfdf;
-        }
+            .returnBtn:hover {
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+                background: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+                background: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+                background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+                background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+                background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+                background-color: #dfdfdf;
+            }
 
             .returnBtn:active {
                 position: relative;
@@ -71,6 +84,7 @@
             direction: rtl;
             float: right;
             width: 200px;
+            height:300px;
             margin: 30px;
             -webkit-box-shadow: 0px 0px 35px 17px #809c16;
             -moz-box-shadow: 0px 0px 35px 17px #809c16;
@@ -141,6 +155,20 @@
             text-decoration: none;
             text-shadow: 0px 1px 0px #b23e35;
             float: left;
+            animation: run_btn 0.3s linear 0s forwards;
+        }
+
+        @-webkit-keyframes run_btn {
+            0% {
+                transform: translateX(80px);
+            }
+            50% {
+                transform: translateX(0px);
+            }
+
+            100% {
+                transform: translateX(60px);
+            }
         }
 
             #purchase_btn:hover {
@@ -351,16 +379,22 @@
         $(document).ready(function () {
 
             arr = "";
+            $("#purchase_btn").hide();
+
             movie = JSON.parse(localStorage.getItem("movie"));
+
             $("#movie_name").text(movie.name);
             $hallNum = $("#hall_number").val();
             $("#date").text(movie.date);
             $("#time").text(movie.time);
             $("#avail_seats_amount").text(movie.avail_seats_amount);
+
             userSeatsAmount = 0
             $ticketsAmount = $("#tickets_amount").text(userSeatsAmount);
             seats = "";
             $seatPositions = $("#seat_positions").text(seats);
+
+            $("#movie_img_on_screen").attr('src', movie.movie_img_url);
 
             getMovieSeatsFromDataBase(movie.number);  
 
@@ -368,9 +402,11 @@
 
             //סימון המקומות ע"י הלקוח
             $('.cinema-seats .seat').on('click', function () {
+
                 $(this).toggleClass('active');
 
                 if ($(this).hasClass("active")) {
+                    $("#purchase_btn").show();
                     if (userSeatsAmount == 6) {
                         alert("לא ניתן להזמין יותר מ-6 כרטיסים");
                         $(this).toggleClass('active');
@@ -395,16 +431,19 @@
                     var text = $seatPositions.text();
                     seats = text.replace(event.target.id, '');
                     $seatPositions.text(seats);
+                    if (userSeatsAmount == 0) {
+                        $("#purchase_btn").hide();
+                    }
                 }
 
             });
 
-
+                    
             $("#purchase_btn").click(function () {
 
-                updateNewOrderInDataBase();
+                addNewOrderInDataBase();
                 updateTheaterDataBase(seats, userSeatsAmount);
-                updareMoviesDateBase(userSeatsAmount);
+                updateMoviesDateBase(userSeatsAmount);
                 location.href = "MoviesPage.html";
             })
 
@@ -417,6 +456,7 @@
         function getMovieSeatsFromDataBase(num) {
 
             $.ajax({
+
                 dataType: "json",	    		                           		 //סוג הנתונים שאנחנו מצפים לקבל מהשרת
                 url: "/api/theater/2/" + parseInt(num),
                 contentType: "application/json; charset=utf-8",	               //סוג הנתונים שאנחנו שולחים לשרת
@@ -432,7 +472,7 @@
                             if (arr[i] == 1)
                                 setAsTakenSeat(parseInt(i) + 1);
                             else
-                                setAsAvilSeat(parseInt(i) + 1);
+                                setAsAvailSeat(parseInt(i) + 1);
                         }
                     }
                     else {
@@ -448,169 +488,98 @@
         function setAsTakenSeat(position) {
 
             if (position <= 16) {
-                if (position <= 8)
-                    $("#A" + position).toggleClass('taken').unbind("click").click(function () {
+                    $("#A" + position).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#A" + position).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });
+ 
             }
             else if (position >= 17 && position <= 32) {
-                if (position <= 24)
                     $("#B" + (position - 16)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                    $("#B" + (position - 16)).addClass('taken').unbind("click").click(function () {
-                        alert("כיסא תפוס");
-                    });
+   
             }
             else if (position >= 33 && position <= 48) {
-                if (position <= 40)
                     $("#C" + (position - 32)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#C" + (position - 32)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });
+  
             }
             else if (position >= 49 && position <= 64) {
-                if (position <= 56)
                     $("#D" + (position - 48)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#D" + (position - 48)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });;
+    
             }
             else if (position >= 65 && position <= 80) {
-                if (position <= 72)
                     $("#E" + (position - 64)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
-                    });
-                else
-                $("#E" + (position - 64)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });;
+                    });         
             }
             else if (position >= 81 && position <= 96) {
-                if (position <= 88)
                     $("#F" + (position - 80)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#F" + (position - 80)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });;
+       
             }
             else if (position >= 97 && position <= 112) {
-                if (position <= 104)
                     $("#G" + (position - 96)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#G" + (position - 96)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });;
+            
             }
             else if (position >= 113 && position <= 128) {
-                if (position <= 120)
                     $("#H" + (position - 112)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#H" + (position - 112)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });
+           
             }
             else if (position >= 129 && position <= 144) {
-                if (position <= 136)
                     $("#I" + (position - 128)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#I" + (position - 128)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });
+             
             }
             else if (position >= 145 && position <= 160) {
-                if (position <= 152)
                     $("#J" + (position - 144)).addClass('taken').unbind("click").click(function () {
                         alert("כיסא תפוס");
                     });
-                else
-                $("#J" + (position - 144)).addClass('taken').unbind("click").click(function () {
-                    alert("כיסא תפוס");
-                });
+              
             }
         }
 
-        function setAsAvilSeat(position) {
+        function setAsAvailSeat(position) {
 
             if (position <= 16) {
-                if (position <= 8)
                     $("#A" + position).addClass('avail');
-                else
-                    $("#A" + position).addClass('avail');
-            }
+                       }
             else if (position >= 17 && position <= 32) {
-                if (position <= 24)
                     $("#B" + (position - 16)).addClass('avail');
-                else
-                    $("#B" + (position - 16)).addClass('avail');
-            }
+                   }
             else if (position >= 33 && position <= 48) {
-                if (position <= 40)
                     $("#C" + (position - 32)).addClass('avail');
-                else
-                    $("#C" + (position - 32)).addClass('avail');
-            }
+                 }
             else if (position >= 49 && position <= 64) {
-                if (position <= 56)
                     $("#D" + (position - 48)).addClass('avail');
-                else
-                    $("#D" + (position - 48)).addClass('avail');
-            }
+               }
             else if (position >= 65 && position <= 80) {
-                if (position <= 72)
-                    $("#E" + (position - 64)).addClass('avail');
-                else
                     $("#E" + (position - 64)).addClass('avail');
             }
             else if (position >= 81 && position <= 96) {
-                if (position <= 88)
                     $("#F" + (position - 80)).addClass('avail');
-                else
-                    $("#F" + (position - 80)).addClass('avail');
-            }
+              }
             else if (position >= 97 && position <= 112) {
-                if (position <= 104)
                     $("#G" + (position - 96)).addClass('avail');
-                else
-                    $("#G" + (position - 96)).addClass('avail');
-            }
+             }
             else if (position >= 113 && position <= 128) {
-                if (position <= 120)
                     $("#H" + (position - 112)).addClass('avail');
-                else
-                    $("#H" + (position - 112)).addClass('avail');
-            }
+             }
             else if (position >= 129 && position <= 144) {
-                if (position <= 136)
                     $("#I" + (position - 128)).addClass('avail');
-                else
-                    $("#I" + (position - 128)).addClass('avail');
-            }
+             }
             else if (position >= 145 && position <= 160) {
-                if (position <= 152)
                     $("#J" + (position - 144)).addClass('avail');
-                else
-                    $("#J" + (position - 144)).addClass('avail');
-            }
+              }
         }
 
         function plusTicket() {
@@ -632,7 +601,7 @@
             }
         }
 
-        function updateNewOrderInDataBase() {
+        function addNewOrderInDataBase() {
 
             $.ajax({
 
@@ -650,7 +619,7 @@
             });
         }
 
-        function updareMoviesDateBase(userSeatsAmount) {
+        function updateMoviesDateBase(userSeatsAmount) {
 
             // עדכון מספר הכיסאות הפנויים החדש בטבלת Movies
             $.ajax({
@@ -671,7 +640,6 @@
 
         function updateTheaterDataBase(seats, userSeatsAmount) {
 
-            var jumps = 3;
             var currentLength;
             for (i = 0; i < userSeatsAmount; i++) {
                 if (i < userSeatsAmount - 1) {
@@ -690,12 +658,13 @@
                 //alert(seats);
             }
             //alert(arr);
-            $num = movie.number;
-            $a = arr;
-                // עדכון הכיסאות באולם הקולנוע
+            //$num = movie.number;
+            //$a = arr;
+
+            // עדכון הכיסאות באולם הקולנוע
                 $.ajax({
                     dataType: "json",			                         //סוג הנתונים שאנחנו מצפים לקבל מהשרת
-                    url: "/api/theater/" + $num + "/" + $a,			                 //הכתובת לשרת ולפונקציה
+                    url: "/api/theater/" + movie.number + "/" + arr,			                 //הכתובת לשרת ולפונקציה
                     contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
                     type: "PUT",				                         //סוג הפעולה		
                     //data: JSON.stringify(),			                 //הנתונים עצמם שאנחנו שולחים
@@ -713,6 +682,7 @@
         }
 
         function findPositionOnArr(currentSeat, currentLength) {
+
             alert(currentSeat.slice(0, 1));
             alert(currentSeat.slice(1, currentLength));
 
@@ -764,20 +734,22 @@
             return arr.substr(0, pos) + newChar + arr.substr(pos + 1);
             //return arr.substring(0, position-1) + newChar + arr.substring(position + 1);
         }
-
-     
-
+   
     </script>
 
 </head>
 
 
 <body>
-    <img id="cinema_screen" src="../images/cinema_screen.jpg" />
-    <input type="button" class="returnBtn" value="חזרה" onclick="returnBtn()"/>
+    <div id="container">
+        <img id="cinema_screen" src="../images/cinema_screen.jpg" />
+        <img id="movie_img_on_screen"/>
+    </div>
+    
+    <input type="button" class="returnBtn" value="חזרה"/>
  
     <div id="movie_div">
-        <h1 id="movie_name"></h1>
+        <h1 id="movie_name" style="color:lightsteelblue; text-shadow: 0px 5px 10px #00dfff;"></h1>
         <span class="movie_details_headers">תאריך:</span>
         <span class="movie_details" id="date">0</span>
         <br />

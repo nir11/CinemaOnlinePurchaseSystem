@@ -188,7 +188,7 @@
             $movieDiv.append($('<span>').addClass('movie_data_span').html("שנה: "));
             var $year = $('<span>').html(year);
             $movieDiv.append($year);
-
+        
             $movieDiv.append($('<br />'))
             $movieDiv.append($('<span>').addClass('movie_data_span').html("מספר דקות: "));
             var $length = $('<span>').html(length);
@@ -210,67 +210,23 @@
             var $cart_link = $('<a>').attr("href", "TheaterPage.html");
             var $cart = $('<img>').attr('src', "../images/cart.png").addClass('cart').hide();
 
-            $cart.on('click', function () {
-
-                let newSeats = $seats.html();
-
-                // עדכון מספר הכיסאות עבור הסרט
-                //מעדכן אבל בכל זאת מחזיר שגיאה
-                $.ajax({
-                    //dataType: "json",			                         //סוג הנתונים שאנחנו מצפים לקבל מהשרת
-                    url: "/api/movie/" + number + "/" + newSeats,			                 //הכתובת לשרת ולפונקציה
-                    contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
-                    type: "PUT",				                         //סוג הפעולה
-                    //data: JSON.stringify(),			                 //הנתונים עצמם שאנחנו שולחים
-                    success: function () {                       //פונקציה  שתופעל לאחר הצלחה
-                        //do something
-                    },
-                    error: function () {
-                    }
-                });
-
-
-                // הוספת הזמנה חדשה לטבלת הזמנות
-                let userAmountSeats = parseInt(seats) - parseInt(newSeats);
-                alert(userAmountSeats);
-                let form = new FormData();
-                form.append('number', number);
-                form.append('userAmountChoice', userAmountSeats);
-
-                $.ajax({
-                    url: "/api/order",
-                    method: "POST",
-                    data: form,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {                          	 		//פונקציה  שתופעל לאחר הצלחה
-                    },
-                    error: function (err) {                            			//פונקציה שתופעל במקרה של שגיאה
-                    }
-
-                })
-
-            });
 
             $purchseBtn.click(function () {
 
                 localStorage.clear();
+
                 var movie = {
                     name: name,
                     number: number,
                     date: $date.html(),
                     time: $time.html(),
-                    avail_seats_amount: avail_seats_amount
+                    avail_seats_amount: avail_seats_amount,
+                    movie_img_url: movie_img_url
                 }
+
                 localStorage.setItem("movie", JSON.stringify(movie));
                 location.href = "TheaterPage.html";
             })
-
-            $cart_link.append($cart);
-
-            $movieDiv.append($cart_link);
-
-
 
             $moviesTableTd.append($movieDiv);
             $moviesTableTr.append($moviesTableTd);
@@ -339,7 +295,7 @@
 
     <ul>
         <li><a class="active" href="MoviesPage.html">הזמנת סרט</a></li>
-        <li><a href="#news">היסטורית הזמנות</a></li>
+        <li><a href="OrderHistoryPage.html">היסטורית הזמנות</a></li>
         <li><a href="AdminPage.html">הוספת סרט - Admin</a></li>
     </ul>
 

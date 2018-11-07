@@ -233,6 +233,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="DTO\OrderHistoryDto.cs" />
     <Compile Include="Controllers\TheaterController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\MovieDto.cs" />
@@ -259,6 +260,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\MenuSheet.css" />
     <Content Include="Content\MovieDivSheet.css" />
+    <Content Include="client\OrderHistoryPage.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -275,6 +277,7 @@
     <Content Include="images\science_fiction.png" />
     <Content Include="images\thriller.png" />
     <Content Include="images\upload.png" />
+    <Content Include="images\war_for_the_planet_of_the_apes.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

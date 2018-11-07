@@ -193,32 +193,29 @@
                 let date = $("#date_input").val();
                 $("#date").html(date.substring(5, 10).split("-").reverse().join("/"));
                 $("#time").html(date.substring(11, 16));
-
             })
-            $("#seats_input").keyup(function () {
                 $("#seats").html($("#seats_input").val());
-            })
 
             $("#preview").click(function () {
 
                 $("#movie_div").css("visibility", "visible");
 
-                $("#genre").html($("#genre_input").find(":selected").text());
-                setGenreColor();
+                //$("#genre").html($("#genre_input").find(":selected").text());
+                //setGenreColor();
 
-                let date = $("#date_input").val();
-                $("#date").html(date.substring(5, 10).split("-").reverse().join("/"));
-                $("#time").html(date.substring(11, 16));
-                $("#name").html($("#name_input").val());
-                $("#year").html($("#year_input").val());
-                $("#length").html($("#length_input").val());
-                $("#seats").html($("#seats_input").val());
-                var rdr = new FileReader();
-                rdr.readAsDataURL($("#file_input")[0].files[0]);
-                rdr.onload = function () {
+                //let date = $("#date_input").val();
+                //$("#date").html(date.substring(5, 10).split("-").reverse().join("/"));
+                //$("#time").html(date.substring(11, 16));
+                //$("#name").html($("#name_input").val());
+                //$("#year").html($("#year_input").val());
+                //$("#length").html($("#length_input").val());
+                //$("#seats").html($("#seats_input").val());
+                //var rdr = new FileReader();
+                //rdr.readAsDataURL($("#file_input")[0].files[0]);
+                //rdr.onload = function () {
 
-                    $("#img").attr('src', rdr.result);
-                }
+                //    $("#img").attr('src', rdr.result);
+                //}
 
             })
 
@@ -309,8 +306,8 @@
 
     <ul>
         <li><a href="MoviesPage.html">הזמנת סרט</a></li>
-        <li><a href="#news">היסטורית הזמנות</a></li>
-        <li><a class="active"  href="AdminPage.html">הוספת סרט - Admin</a></li>
+        <li><a href="OrderHistoryPage.html">היסטורית הזמנות</a></li>
+        <li><a class="active" href="AdminPage.html">הוספת סרט - Admin</a></li>
     </ul>
 
     <form>
@@ -397,7 +394,7 @@
                     <span>מספר הכיסאות: </span>
                 </td>
                 <td>
-                    <input type="number" id="seats_input" />
+                    <input type="number" id="seats_input" value="160" disabled="disabled" />
                     <br />
                 </td>
             </tr>

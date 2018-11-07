@@ -3,24 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using ClassLibrary;
+using System.Web;
+using System.IO;
+using WebApi.DTO;
 
 namespace WebApi.Controllers
 {
     public class OrderController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public List<OrderHistoryDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            //return new string[] { "value1", "value2" };
+            CinemaDB db = new CinemaDB();
+
+            return db.Orders.Select(x => new OrderHistoryDto()
+            {
+                id = x.id,
+                order_date = x.order_date.ToString(),
+                name = x.Movies.name,
+                movie_date = x.Movies.date.ToString(),
+                user_seats = x.user_seats
+            }).ToList();
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public List<OrderHistoryDto> Get(int id)
         {
-            return "value";
+            return null;
         }
 
         // POST api/<controller>

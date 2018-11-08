@@ -260,7 +260,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\MenuSheet.css" />
     <Content Include="Content\MovieDivSheet.css" />
-    <Content Include="client\OrderHistoryPage.html" />
+    <Content Include="client\OrdersPage.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

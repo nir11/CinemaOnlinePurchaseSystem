@@ -11,15 +11,7 @@ namespace WebApi.Controllers
 {
     public class TheaterController : ApiController
     {
-        //// GET api/<controller>
-        public int Get()
-        {
-            //return new string[] { "value1", "value2" };
-            //CinemaDB db = new CinemaDB();
-            //return db.Theater.Select(x => x.avail_seats);
-            return 1;
-        }
-
+     
         // GET api/<controller>/5
         [Route("api/theater/{s}/{number}")]
         public TheaterDto Get(string s, int number)
@@ -47,7 +39,6 @@ namespace WebApi.Controllers
         }
 
 
-
         // PUT api/<controller>/5
         [Route("api/theater/{movieNumber}/{newSeatsArr}")]
         public void Put(int movieNumber, string newSeatsArr)
@@ -62,10 +53,6 @@ namespace WebApi.Controllers
                 db.SaveChanges();
             }
         }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+    
     }
 }

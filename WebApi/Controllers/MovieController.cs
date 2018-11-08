@@ -46,19 +46,6 @@ namespace WebApi.Controllers
                 movie_img_url = x.movie_img_url,
                 seats = x.seats
             }).OrderBy(y => y.date).ToList();
-
-        }
-
-
-
-        // POST api/<controller>        
-        [HttpGet]
-        [Route("api/movie/{name}/{s}")]
-        public int getMovieByName(string name, string s)
-        {
-            CinemaDB db = new CinemaDB();
-            Movies m = db.Movies.SingleOrDefault(x => x.name.Equals(name));
-            return m.number;
         }
 
         // POST api/<controller>
@@ -89,9 +76,6 @@ namespace WebApi.Controllers
             db.SaveChanges();
         }
 
-
-
-
         // PUT api/<controller>/5
         [Route("api/movie/{movieNumber}/{userAmountSeats}")]
         public void Put(int movieNumber, string userAmountSeats)
@@ -108,9 +92,5 @@ namespace WebApi.Controllers
             }          
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }

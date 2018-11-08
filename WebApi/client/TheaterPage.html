@@ -29,10 +29,7 @@
             margin: 30px auto; /* Will not center vertically and won't work in IE6/7. */
             left: 0;
             right: 0;
-        }
-
-      
-
+        }    
 
         .returnBtn {
             margin-left: 30px;
@@ -63,22 +60,21 @@
             text-shadow: 0px 1px 0px #ffffff;
         }
 
-            .returnBtn:hover {
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
-                background: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-                background: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-                background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-                background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
-                background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
-                background-color: #dfdfdf;
-            }
+        .returnBtn:hover {
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+            background: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+            background-color: #dfdfdf;
+        }
 
-            .returnBtn:active {
-                position: relative;
-                top: 1px;
-            }
-
+        .returnBtn:active {
+            position: relative;
+            top: 1px;
+        }
 
         #movie_div {
             direction: rtl;
@@ -171,18 +167,18 @@
             }
         }
 
-            #purchase_btn:hover {
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
-                background: -moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: -webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: -o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: -ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
-                background: linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
-                background-color: #ce0100;
-            }
+        #purchase_btn:hover {
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
+            background: -moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+            background: -webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+            background: -o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+            background: -ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+            background: linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
+            background-color: #ce0100;
+        }
 
-        .theatre {
+        .theater {
             display: flex;
             position: absolute;
             top: 75%;
@@ -194,31 +190,29 @@
             display: flex;
         }
 
-            .cinema-seats .seat {
-                cursor: pointer;
-            }
+        .cinema-seats .seat {
+            cursor: pointer;
+        }          
 
-            
+        .cinema-seats .seat:hover:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 7px;
+        }
 
-                .cinema-seats .seat:hover:before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.5);
-                    border-radius: 7px;
-                }
-
-                .cinema-seats .seat.active:before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(255, 255, 255, 0.6);
-                    border-radius: 7px;
-                }
+        .cinema-seats .seat.active:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 7px;
+        }
 
         .left .cinema-row {
             transform: skew(-15deg);
@@ -243,135 +237,122 @@
         .taken {
             background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #b54041, #f3686a);        
         }
-
-       
     
         .left .row-2 {
             transform: skew(-13deg);
         }
 
-            .left .row-2 .seat {
-                transform: skew(18deg);
-            }
+        .left .row-2 .seat {
+            transform: skew(18deg);
+        }
 
         .left .row-3 {
             transform: skew(-12deg);
         }
 
-            .left .row-3 .seat {
-                transform: skew(16deg);
-            }
+        .left .row-3 .seat {
+            transform: skew(16deg);
+        }
 
         .left .row-4 {
             transform: skew(-11deg);
         }
 
-            .left .row-4 .seat {
-                transform: skew(15deg);
-            }
+        .left .row-4 .seat {
+            transform: skew(15deg);
+        }
 
         .left .row-5 {
             transform: skew(-10deg);
         }
 
-            .left .row-5 .seat {
-                transform: skew(12deg);
-            }
+        .left .row-5 .seat {
+            transform: skew(12deg);
+        }
 
         .left .row-6 {
             transform: skew(-9deg);
         }
 
-            .left .row-6 .seat {
-                transform: skew(10deg);
-            }
+        .left .row-6 .seat {
+            transform: skew(10deg);
+        }
 
         .left .row-7 {
             transform: skew(-7deg);
         }
 
-            .left .row-7 .seat {
-                transform: skew(8deg);
-            }
+        .left .row-7 .seat {
+            transform: skew(8deg);
+        }
 
         .right {
             margin-left: 70px;
         }
 
-            .right .cinema-row {
-                transform: skew(7deg);
-                margin: 0 6px;
-            }
+        .right .cinema-row {
+            transform: skew(7deg);
+            margin: 0 6px;
+        }
 
-            .right .seat {
-                width: 35px;
-                height: 50px;
-                border-radius: 7px;
-                margin-bottom: 10px;
-                transform: skew(-8deg);
-                margin-top: -32px;
-                box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            }
-
-        /*.taken_right {
+        .right .seat {
             width: 35px;
             height: 50px;
             border-radius: 7px;
-            background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #b54041, #f3686a);
             margin-bottom: 10px;
             transform: skew(-8deg);
             margin-top: -32px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        }*/
-            
+        }
+      
+        .right .row-2 {
+            transform: skew(9deg);
+        }
 
-            .right .row-2 {
-                transform: skew(9deg);
-            }
+        .right .row-2 .seat {
+            transform: skew(-10deg);
+        }
 
-                .right .row-2 .seat {
-                    transform: skew(-10deg);
-                }
+        .right .row-3 {
+            transform: skew(10deg);
+        }
 
-            .right .row-3 {
-                transform: skew(10deg);
-            }
+        .right .row-3 .seat {
+            transform: skew(-12deg);
+        }
 
-                .right .row-3 .seat {
-                    transform: skew(-12deg);
-                }
+        .right .row-4 {
+            transform: skew(11deg);
+        }
 
-            .right .row-4 {
-                transform: skew(11deg);
-            }
+        .right .row-4 .seat {
+            transform: skew(-15deg);
+        }
 
-                .right .row-4 .seat {
-                    transform: skew(-15deg);
-                }
+        .right .row-5 {
+            transform: skew(12deg);
+        }
 
-            .right .row-5 {
-                transform: skew(12deg);
-            }
+        .right .row-5 .seat {
+            transform: skew(-16deg);
+        }
 
-                .right .row-5 .seat {
-                    transform: skew(-16deg);
-                }
+        .right .row-6 {
+            transform: skew(13deg);
+        }
 
-            .right .row-6 {
-                transform: skew(13deg);
-            }
+        .right .row-6 .seat {
+            transform: skew(-18deg);
+        }
 
-                .right .row-6 .seat {
-                    transform: skew(-18deg);
-                }
+        .right .row-7 {
+            transform: skew(15deg);
+        }
 
-            .right .row-7 {
-                transform: skew(15deg);
-            }
+        .right .row-7 .seat {
+            transform: skew(-20deg);
+        }
 
-                .right .row-7 .seat {
-                    transform: skew(-20deg);
-                }
     </style>
 
     <script>
@@ -381,8 +362,8 @@
             arr = "";
             $("#purchase_btn").hide();
 
+            // קבלת נתוני הסרט מדף ההזמנות
             movie = JSON.parse(localStorage.getItem("movie"));
-
             $("#movie_name").text(movie.name);
             $hallNum = $("#hall_number").val();
             $("#date").text(movie.date);
@@ -391,16 +372,15 @@
 
             userSeatsAmount = 0
             $ticketsAmount = $("#tickets_amount").text(userSeatsAmount);
-            seats = "";
-            $seatPositions = $("#seat_positions").text(seats);
+            seatsStr = "";
+            $seatPositions = $("#seat_positions").text(seatsStr);
 
             $("#movie_img_on_screen").attr('src', movie.movie_img_url);
 
+            // קבלת הכיסאות הפנויים והתפוסים
             getMovieSeatsFromDataBase(movie.number);  
 
-
-
-            //סימון המקומות ע"י הלקוח
+            // בחירת המקומות ע"י הלקוח 
             $('.cinema-seats .seat').on('click', function () {
 
                 $(this).toggleClass('active');
@@ -416,12 +396,12 @@
                         userSeatsAmount = userSeatsAmount + 1;
                         $ticketsAmount.text(userSeatsAmount);
                         if (userSeatsAmount == 1) {
-                            seats = event.target.id;
+                            seatsStr = event.target.id;
                         }
                         else {
-                            seats = seats + " " + event.target.id;
+                            seatsStr = seatsStr + " " + event.target.id;
                         }
-                        $seatPositions.text(seats);
+                        $seatPositions.text(seatsStr);
                     }
                 }
                 else {
@@ -429,24 +409,22 @@
                     userSeatsAmount = userSeatsAmount - 1;
                     $ticketsAmount.text(userSeatsAmount);
                     var text = $seatPositions.text();
-                    seats = text.replace(event.target.id, '');
-                    $seatPositions.text(seats);
-                    if (userSeatsAmount == 0) {
-                        $("#purchase_btn").hide();
-                    }
+                    seatsStr = text.replace(event.target.id, '');
+                    $seatPositions.text(seatsStr);
+                
                 }
-
             });
-
-                    
+        
+            // ברכישת הכרטיסים צריכים לעדכן 3 טבלאות שונות   
             $("#purchase_btn").click(function () {
 
                 addNewOrderInDataBase();
-                updateTheaterDataBase(seats, userSeatsAmount);
+                updateTheaterDataBase(seatsStr, userSeatsAmount);
                 updateMoviesDateBase(userSeatsAmount);
                 location.href = "MoviesPage.html";
             })
 
+            // כפתור חזרה לדף הקודם
             $(".returnBtn").click(function () {
                 location.href = "MoviesPage.html";
             })
@@ -484,7 +462,7 @@
                 }
             });    
         }
-
+        
         function setAsTakenSeat(position) {
 
             var cSeat = '#' + String.fromCharCode((parseInt(position / 16) + 'A'.charCodeAt(0))) + parseInt(position % 16);
@@ -498,12 +476,10 @@
             var cSeat = '#' + String.fromCharCode((parseInt(position / 16) + 'A'.charCodeAt(0))) + parseInt(position % 16);
             $(cSeat).addClass('avail');
         }
-
         function plusTicket() {
 
             var newSeatsAmount = parseInt($("#avail_seats_amount").text()) + 1;
             $("#avail_seats_amount").text(newSeatsAmount)
-              //$cart.show();
         }
 
         function minusTicket() {
@@ -514,7 +490,7 @@
                 $("#avail_seats_amount").text(currentAmount)              
             }
             if (currentAmount == 0) {
-                //$cart.hide();
+                $("#purchase_btn").hide();
             }
         }
 
@@ -555,52 +531,41 @@
             });
         }
 
-        function updateTheaterDataBase(seats, userSeatsAmount) {
+        function updateTheaterDataBase(seatsStr, userSeatsAmount) {
 
             var currentLength;
             for (i = 0; i < userSeatsAmount; i++) {
                 if (i < userSeatsAmount - 1) {
-                    currentLength = parseInt(seats.indexOf(" "));
-                    //alert(currentLength);
-                    //alert(seats.slice(0, currentLength));
+                    currentLength = parseInt(seatsStr.indexOf(" "));
                     findPositionOnArr(seats.slice(0, currentLength), currentLength);
                 }
                 else {
-                    currentLength = parseInt(seats.length);
-                    //alert(currentLength);
-                    //alert(seats.slice(0, currentLength));
-                    findPositionOnArr(seats.slice(0, currentLength), currentLength);
+                    currentLength = parseInt(seatsStr.length);
+                    findPositionOnArr(seatsStr.slice(0, currentLength), currentLength);
                 }               
-                seats = seats.substring(seats.indexOf(" ") + 1);
-                //alert(seats);
             }
-            //alert(arr);
-            //$num = movie.number;
-            //$a = arr;
 
             // עדכון הכיסאות באולם הקולנוע
-                $.ajax({
-                    dataType: "json",			                         //סוג הנתונים שאנחנו מצפים לקבל מהשרת
-                    url: "/api/theater/" + movie.number + "/" + arr,			                 //הכתובת לשרת ולפונקציה
-                    contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
-                    type: "PUT",				                         //סוג הפעולה		
-                    //data: JSON.stringify(),			                 //הנתונים עצמם שאנחנו שולחים
-                    success: function () {                       //פונקציה  שתופעל לאחר הצלחה
-                        alert("אולם הקולנוע עודכן");
-                    },
-                    error: function () {
-                        alert("error");
+            $.ajax({
+                dataType: "json",			                         //סוג הנתונים שאנחנו מצפים לקבל מהשרת
+                url: "/api/theater/" + movie.number + "/" + arr,			                 //הכתובת לשרת ולפונקציה
+                contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
+                type: "PUT",				                         //סוג הפעולה		
+                //data: JSON.stringify(),			                 //הנתונים עצמם שאנחנו שולחים
+                success: function () {                       //פונקציה  שתופעל לאחר הצלחה
+                    alert("אולם הקולנוע עודכן");
+                },
+                error: function () {
+                    alert("error");
 
-                    }
-                });
-
-
-           
+                }
+            });          
         }
 
         function findPositionOnArr(currentSeat, currentLength) {
-            alert(currentSeat.slice(0, 1));
-            alert(currentSeat.slice(1, currentLength));
+
+            //alert(currentSeat.slice(0, 1));
+            //alert(currentSeat.slice(1, currentLength));
 
             var curSeat = parseInt(currentSeat.slice(1, currentLength)) + (currentSeat.charCodeAt(0) - 'A'.charCodeAt(0)) * 16;
             arr = replaceAt(parseInt(curSeat), "1");
@@ -608,7 +573,6 @@
         function replaceAt(position, newChar) {
             var pos = position - 1;
             return arr.substr(0, pos) + newChar + arr.substr(pos + 1);
-            //return arr.substring(0, position-1) + newChar + arr.substring(position + 1);
         }
    
     </script>
@@ -648,7 +612,8 @@
         <input type="button" id="purchase_btn" value="רכישה" />
 
     </div>
-    <div class="theatre">
+
+    <div class="theater">
 
         <!--כיסאות משמאל-->
         <div class="cinema-seats left">

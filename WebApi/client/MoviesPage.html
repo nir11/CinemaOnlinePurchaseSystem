@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
 
     <link href="../Content/MenuSheet.css" rel="stylesheet" />
@@ -12,8 +13,6 @@
 
     <style>
 
-
-
         body {
             margin-bottom:30px;
         }
@@ -21,37 +20,6 @@
         table {
             margin-right:100px;
         }
-
-        .buttons_div {
-            float: right;
-            margin-top: 5px;
-            margin-right: 45px;
-        }
-
-        .cart {
-            position: relative;
-            left: 0;
-            width: 40px;
-            height: 40px;
-            margin-left: -50px;
-            animation: run_cart 0.2s linear 0s forwards;
-        }
-
-        @-webkit-keyframes run_cart {
-            0% {
-                transform: translateX(0px);
-            }
-
-            100% {
-                transform: translateX(70px);
-            }
-        }
-
-
-
-
-
-
 
         #searchbox5 {
             width: 230px;
@@ -75,10 +43,11 @@
             -webkit-transition: all 0.7s ease 0s;
         }
 
-            #search5:focus {
-                width: 250px;
-                outline: 0;
-            }
+        #search5:focus {
+            width: 250px;
+            outline: 0;
+        }
+
         .full_hall {
             -moz-box-shadow: inset 0px 1px 0px 0px #cf866c;
             -webkit-box-shadow: inset 0px 1px 0px 0px #cf866c;
@@ -106,9 +75,8 @@
             margin-right: 90px;
             margin-top: 8px;
             font-weight:bold;
-        }
-
-    
+            color:black;
+        }  
 
     </style>
 
@@ -117,9 +85,7 @@
 
         $(document).ready(function () {
 
-            cellNum = 1;
-            moviesArr = [];
-
+            // קבלת רשימת הסרטים מהטבלה בטעינת הדף
             $.ajax({
                 dataType: "json",	    		                           		 //סוג הנתונים שאנחנו מצפים לקבל מהשרת
                 url: "/api/movie",
@@ -150,6 +116,7 @@
                 }
             });
 
+            // קבלת רשימת הסרטים לפי חיפוש הסרט
             $("#search5").keyup(function () {
 
                 $searchText = $("#search5").val();
@@ -167,6 +134,8 @@
                         if (data) {
 
                             for (var i in data) {
+
+                                // יצירת שורה חדשה כל 3 סרטים
                                 if (i % 3 == 0)
                                     $moviesTableTr = $('<tr>');
                                 getNewMovie(i, $moviesTableTr, data[i].number, data[i].name, data[i].date,
@@ -184,22 +153,17 @@
 
             });
 
-           
-
         })
 
-        // פונקציה שיוצרת דיב של סרט בצורה דינאמית
+        // פונקציה שיוצרת דיב של סרט בצורה דינאמית ומוסיפה למקום הבא בטבלה
         function getNewMovie(index, $moviesTableTr, number, name, date, year, genre, length, movie_img_url, avail_seats_amount) {
 
-            movieEnName = movie_img_url.substring(8, movie_img_url.length - 4);
-            moviesArr.push(movieEnName);
             var $moviesTableTd = $('<td>');
 
             var $movieDiv = $('<div>').addClass('movie_div');
 
             var $genreSpan = $('<span>').addClass('genre').html(genre);
             setGenreColor($genreSpan, genre);
-
             $movieDiv.append($genreSpan)
             $movieDiv.append($('<br />'))
 
@@ -209,7 +173,6 @@
             $circleDiv.append($date);
             $circleDiv.append($('<br />'))
             $circleDiv.append($time);
-
             $movieDiv.append($circleDiv)
 
             var $headline = $('<h1>').html(name);
@@ -220,23 +183,19 @@
 
             $movieDiv.append($('<span>').addClass('movie_data_span').html("שנה: "));
             var $year = $('<span>').html(year);
-            $movieDiv.append($year);
-        
+            $movieDiv.append($year);     
             $movieDiv.append($('<br />'))
+
             $movieDiv.append($('<span>').addClass('movie_data_span').html("מספר דקות: "));
             var $length = $('<span>').html(length);
             $movieDiv.append($length);
             $movieDiv.append($('<br />'))
+
             $movieDiv.append($('<span>').addClass('movie_data_span').html("מקומות פנויים: "));
             var $seats = $('<span>').html(avail_seats_amount);
-            $movieDiv.append($seats);
-
-            
-
-
-
-            //===================================================
+            $movieDiv.append($seats);            
             $movieDiv.append($('<br />'))
+
             var $purchseBtn = $('<input type = "button">');
 
             if ($seats.html() == 0) {
@@ -248,14 +207,11 @@
             }
             $movieDiv.append($purchseBtn);
 
+            $moviesTableTd.append($movieDiv);
+            $moviesTableTr.append($moviesTableTd);
+            $("#table").append($moviesTableTr);
 
-
-            //===================================================
-
-            var $cart_link = $('<a>').attr("href", "TheaterPage.html");
-            var $cart = $('<img>').attr('src', "../images/cart.png").addClass('cart').hide();
-
-
+            // בלחיצה על רכישת כרטיסים שולחים את נתוני הסרט לדף האולם
             $purchseBtn.click(function () {
 
                 localStorage.clear();
@@ -273,34 +229,6 @@
                 location.href = "TheaterPage.html";
             })
 
-            $moviesTableTd.append($movieDiv);
-            $moviesTableTr.append($moviesTableTd);
-            $("#table").append($moviesTableTr);
-        }
-
-        function plusTicket(index, $cart, $seats) {
-
-            var currentAmount = parseInt($("#tickets_" + moviesArr[index]).html());
-            currentAmount = currentAmount + 1;
-            $("#tickets_" + moviesArr[index]).html(currentAmount);
-            var newSeatsAmount = parseInt($seats.html()) - 1;
-            $seats.html(newSeatsAmount);
-            $cart.show();
-        }
-
-        function minusTicket(index, $cart, $seats) {
-
-            var currentAmount = parseInt($("#tickets_" + moviesArr[index]).html());
-            if (currentAmount > 0) {
-                currentAmount = currentAmount - 1;
-                $("#tickets_" + moviesArr[index]).html(currentAmount);
-                var newSeatsAmount = parseInt($seats.html()) + 1;
-                $seats.html(newSeatsAmount);
-
-            }
-            if (currentAmount == 0) {
-                $cart.hide();
-            }
         }
 
         function setGenreColor($genreSpan, genre) {
@@ -340,13 +268,14 @@
 
     <ul>
         <li><a class="active" href="MoviesPage.html">הזמנת סרט</a></li>
-        <li><a href="OrderHistoryPage.html">היסטורית הזמנות</a></li>
+        <li><a href="OrdersPage.html">היסטורית הזמנות</a></li>
         <li><a href="AdminPage.html">הוספת סרט - Admin</a></li>
     </ul>
 
     <form action="/search" id="searchbox5">
         <input id="search5" type="text" placeholder="חפש סרט..." />
     </form>
+
     <br /> <br />
 
     <table id="table">

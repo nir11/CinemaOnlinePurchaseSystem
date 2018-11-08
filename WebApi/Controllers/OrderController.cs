@@ -27,13 +27,7 @@ namespace WebApi.Controllers
                 user_seats = x.user_seats_amount,
                 user_seats_positions = x.user_seats_positions
             }).ToList();
-        }
-
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        }  
 
         // POST api/<controller>
         [Route("api/order/{num}/{seatsAmount}")]
@@ -47,17 +41,6 @@ namespace WebApi.Controllers
             CinemaDB db = new CinemaDB();
             db.Orders.Add(order);
             db.SaveChanges();
-
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        } 
     }
 }

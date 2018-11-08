@@ -163,7 +163,8 @@
     <script>
         $(document).ready(function () {
 
-            let today = new Date().toISOString().substr(0, 16);
+       
+            var today = new Date().toISOString().substr(0, 16);
             $("#date_input").val(today);
 
             $("#name_input").keyup(function() {
@@ -212,7 +213,7 @@
                 $(".genre").html("");
                 $("#time").html("");
                 $("#length").html("");
-                $("#img").attr('src', "");
+                $("#img").removeAttr('src');
                 $("#seats").html("");
 
                 //location.href = "AdminPage.html";

@@ -14,7 +14,7 @@ This project is based on the 4-layer model:
 <br/>                                                                                                                              
 <div>
     <h3>1. Moives List</h3>
-    <span>Chose a movie for order</span>
+    <span>Chose a movie to order</span>
     <img src="WebApi/Screenshots/image1.JPG" width="800">
     <img src="WebApi/Screenshots/image2.JPG" width="800" />
 </div>

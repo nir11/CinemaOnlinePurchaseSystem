@@ -32,7 +32,7 @@ This project is based on the 4-layer model:
 <span>=================================================================================</span>
 <div>
     <h3>2. Orders History</h3>
-    <span>Including all the user's purchase history</span>
+    <span>Including all the user's purchases history</span>
     <br/>                                                                                                                              
     <img src="WebApi/Screenshots/image4.JPG" width="800" />
 </div>

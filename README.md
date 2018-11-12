@@ -1,6 +1,6 @@
 # Server_Side_Final_Project
 
-# CafeteriaOnlineStock
+# Cinema online purchase system
 
 Online purchase system for Cinema.
 <br/>

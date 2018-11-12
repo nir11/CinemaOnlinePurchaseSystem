@@ -14,9 +14,9 @@ This project is based on the 4-layer model:
 <br/>                                                                                                                              
 <div>
     <h3>1. Moives List</h3>
-        <span>Chose a movie for order</span>
-    <img src="WebApi/Screenshots/image1.JPG" width="400">
-    <img src="WebApi/Screenshots/image2.JPG" width="400" />
+    <span>Chose a movie for order</span>
+    <img src="WebApi/Screenshots/image1.JPG" width="800">
+    <img src="WebApi/Screenshots/image2.JPG" width="800" />
 </div>
 <span>=================================================================================</span>
 <div>
@@ -27,7 +27,7 @@ This project is based on the 4-layer model:
 <span>=================================================================================</span>
 <div>
     <h3>2. Orders History</h3>
-        <h3>Including all the user's history</h3>
+        <h3>Including all the user's purchase history</h3>
     <br/>                                                                                                                              
     <img src="WebApi/Screenshots/image4.JPG" width="800" />
 </div>

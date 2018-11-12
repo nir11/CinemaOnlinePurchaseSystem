@@ -1,5 +1,3 @@
-# Server_Side_Final_Project
-
 # Cinema online purchase system
 
 Online purchase system for Cinema.

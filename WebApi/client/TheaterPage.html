@@ -411,7 +411,9 @@
                     var text = $seatPositions.text();
                     seatsStr = text.replace(event.target.id, '');
                     $seatPositions.text(seatsStr);
-                
+                    if (userSeatsAmount == 0) {
+                        $("#purchase_btn").hide();
+                    }
                 }
             });
         
@@ -464,18 +466,211 @@
         }
         
         function setAsTakenSeat(position) {
-
-            var cSeat = '#' + String.fromCharCode((parseInt(position / 16) + 'A'.charCodeAt(0))) + parseInt(position % 16);
-            $(cSeat).toggleClass('taken').unbind("click").click(function () {
-                alert("כיסא תפוס");
-            });
+            if (position <= 16) {
+                if (position <= 8) {
+                    $("#A" + position).toggleClass('taken').unbind("click");
+                    $("#A" + position).toggleClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#A" + position).addClass('taken').unbind("click");
+                $("#A" + position).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
+            
+            }
+            else if (position >= 17 && position <= 32) {
+                if (position <= 24) {
+                    $("#B" + (position - 16)).addClass('taken').unbind("click");
+                    $("#B" + (position - 16)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#B" + (position - 16)).addClass('taken').unbind("click");
+                $("#B" + (position - 16)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
+            }
+            else if (position >= 33 && position <= 48) {
+                if (position <= 40) {
+                    $("#C" + (position - 32)).addClass('taken').unbind("click");
+                    $("#C" + (position - 32)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#C" + (position - 32)).addClass('taken').unbind("click");
+                $("#C" + (position - 32)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
+            }
+            else if (position >= 49 && position <= 64) {
+                if (position <= 56) {
+                    $("#D" + (position - 48)).addClass('taken').unbind("click");
+                    $("#D" + (position - 48)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#D" + (position - 48)).addClass('taken').unbind("click");
+                $("#D" + (position - 48)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
+            }
+            else if (position >= 65 && position <= 80) {
+                if (position <= 72) {
+                    $("#E" + (position - 64)).addClass('taken').unbind("click");
+                    $("#E" + (position - 64)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#E" + (position - 64)).addClass('taken').unbind("click");
+                $("#E" + (position - 64)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
+            }
+            else if (position >= 81 && position <= 96) {
+                if (position <= 88) {
+                    $("#F" + (position - 80)).addClass('taken').unbind("click");
+                    $("#F" + (position - 80)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#F" + (position - 80)).addClass('taken').unbind("click");
+                $("#F" + (position - 80)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
+            }
+            else if (position >= 97 && position <= 112) {
+                if (position <= 104) {
+                    $("#G" + (position - 96)).addClass('taken').unbind("click");
+                    $("#G" + (position - 96)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#G" + (position - 96)).addClass('taken').unbind("click");
+                $("#G" + (position - 96)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });;
+            }
+            else if (position >= 113 && position <= 128) {
+                if (position <= 120) {
+                    $("#H" + (position - 112)).addClass('taken').unbind("click");
+                    $("#H" + (position - 112)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#H" + (position - 112)).addClass('taken').unbind("click");
+                $("#H" + (position - 112)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
+            }
+            else if (position >= 129 && position <= 144) {
+                if (position <= 136) {
+                    $("#I" + (position - 128)).addClass('taken').unbind("click");
+                    $("#I" + (position - 128)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#I" + (position - 128)).addClass('taken').unbind("click");
+                $("#I" + (position - 128)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
+            }
+            else if (position >= 145 && position <= 160) {
+                if (position <= 152) {
+                    $("#J" + (position - 144)).addClass('taken').unbind("click");
+                    $("#J" + (position - 144)).addClass('taken').unbind("click").click(function () {
+                        alert("כיסא תפוס");
+                    });
+                }
+                else
+                $("#J" + (position - 144)).addClass('taken').unbind("click");
+                $("#J" + (position - 144)).addClass('taken').unbind("click").click(function () {
+                    alert("כיסא תפוס");
+                });
+            }
         }
 
         function setAsAvailSeat(position) {
+            if (position <= 16) {
+                if (position <= 8)
+                    $("#A" + position).addClass('avail');
+                else
+                    $("#A" + position).addClass('avail');
+            }
+        
+            else if (position >= 17 && position <= 32) {
+            if (position <= 24)
+                $("#B" + (position - 16)).addClass('avail');
+            else
+                $("#B" + (position - 16)).addClass('avail');
+        
+                   }
+            else if (position >= 33 && position <= 48) {
+            if (position <= 40)
+                $("#C" + (position - 32)).addClass('avail');
+            else
+                $("#C" + (position - 32)).addClass('avail');
+        
+                 }
+            else if (position >= 49 && position <= 64) {
+            if (position <= 56)
+                $("#D" + (position - 48)).addClass('avail');
+            else
+                $("#D" + (position - 48)).addClass('avail');
+        
+               }
+            else if (position >= 65 && position <= 80) {
+                if (position <= 72)
+                    $("#E" + (position - 64)).addClass('avail');
+                else
+                    $("#E" + (position - 64)).addClass('avail');
+            }
+        else if (position >= 81 && position <= 96) {
+            if (position <= 88)
+                $("#F" + (position - 80)).addClass('avail');
+            else
+                $("#F" + (position - 80)).addClass('avail');
+        
+              }
+            else if (position >= 97 && position <= 112) {
+            if (position <= 104)
+                $("#G" + (position - 96)).addClass('avail');
+            else
+                $("#G" + (position - 96)).addClass('avail');
+        
+             }
+            else if (position >= 113 && position <= 128) {
+            if (position <= 120)
+                $("#H" + (position - 112)).addClass('avail');
+            else
+                $("#H" + (position - 112)).addClass('avail');
+        
+             }
+            else if (position >= 129 && position <= 144) {
+            if (position <= 136)
+                $("#I" + (position - 128)).addClass('avail');
+            else
+                $("#I" + (position - 128)).addClass('avail');
+        
+             }
+            else if (position >= 145 && position <= 160) {
+            if (position <= 152)
+                $("#J" + (position - 144)).addClass('avail');
+            else
+                $("#J" + (position - 144)).addClass('avail');
+        
+              }
+        }
 
-            var cSeat = '#' + String.fromCharCode((parseInt(position / 16) + 'A'.charCodeAt(0))) + parseInt(position % 16);
-            $(cSeat).addClass('avail');
-        }
         function plusTicket() {
 
             var newSeatsAmount = parseInt($("#avail_seats_amount").text()) + 1;
@@ -489,9 +684,7 @@
                 currentAmount = currentAmount - 1;
                 $("#avail_seats_amount").text(currentAmount)              
             }
-            if (currentAmount == 0) {
-                $("#purchase_btn").hide();
-            }
+            
         }
 
         function addNewOrderInDataBase() {
@@ -502,12 +695,11 @@
                 url: "/api/order/" + parseInt(movie.number) + "/" + parseInt(userSeatsAmount),			                 //הכתובת לשרת ולפונקציה
                 contentType: "application/json; charset=utf-8",	   //סוג הנתונים שאנחנו שולחים לשרת
                 type: "POST",				                         //סוג הפעולה		
-                data: JSON.stringify(seats),			                 //הנתונים עצמם שאנחנו שולחים
+                data: JSON.stringify(seatsStr),			                 //הנתונים עצמם שאנחנו שולחים
                 success: function () {                       //פונקציה  שתופעל לאחר הצלחה
                     alert("ההזמנה בוצעה!");
                 },
                 error: function () {                            			//פונקציה שתופעל במקרה של שגיאה
-                    alert("error");
                 }
             });
         }
@@ -526,7 +718,6 @@
                     alert("מספר הכיסאות הפנויים עודכנו ");
                 },
                 error: function () {
-                    alert("error");
                 }
             });
         }
@@ -537,13 +728,15 @@
             for (i = 0; i < userSeatsAmount; i++) {
                 if (i < userSeatsAmount - 1) {
                     currentLength = parseInt(seatsStr.indexOf(" "));
-                    findPositionOnArr(seats.slice(0, currentLength), currentLength);
+                    findPositionOnArr(seatsStr.slice(0, currentLength), currentLength);
                 }
                 else {
                     currentLength = parseInt(seatsStr.length);
                     findPositionOnArr(seatsStr.slice(0, currentLength), currentLength);
-                }               
+                }       
+                seatsStr = seatsStr.substring(seatsStr.indexOf(" ") + 1);
             }
+
 
             // עדכון הכיסאות באולם הקולנוע
             $.ajax({
@@ -556,8 +749,6 @@
                     alert("אולם הקולנוע עודכן");
                 },
                 error: function () {
-                    alert("error");
-
                 }
             });          
         }
@@ -569,7 +760,8 @@
 
             var curSeat = parseInt(currentSeat.slice(1, currentLength)) + (currentSeat.charCodeAt(0) - 'A'.charCodeAt(0)) * 16;
             arr = replaceAt(parseInt(curSeat), "1");
-        }
+        }
+
         function replaceAt(position, newChar) {
             var pos = position - 1;
             return arr.substr(0, pos) + newChar + arr.substr(pos + 1);

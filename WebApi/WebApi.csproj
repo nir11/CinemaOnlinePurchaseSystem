@@ -278,6 +278,11 @@
     <Content Include="images\thriller.png" />
     <Content Include="images\upload.png" />
     <Content Include="images\war_for_the_planet_of_the_apes.jpg" />
+    <Content Include="Screenshots\image1.JPG" />
+    <Content Include="Screenshots\image2.JPG" />
+    <Content Include="Screenshots\image3.JPG" />
+    <Content Include="Screenshots\image4.JPG" />
+    <Content Include="Screenshots\image5.JPG" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

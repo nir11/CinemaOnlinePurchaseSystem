@@ -17,9 +17,9 @@ This project is based on the 4-layer model:
     <span>Chose a movie to order</span>
     <br/>
     <img src="WebApi/Screenshots/image1.JPG" width="800">
-    <br/>    
-    <span>#############################################################################</span>
-    <br/>   
+    <br/>    <br/>        
+    <span>###########################################################################################</span>
+    <br/>    <br/>       
     <img src="WebApi/Screenshots/image2.JPG" width="800" />
 </div>
 <span>=================================================================================</span>

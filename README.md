@@ -1,6 +1,6 @@
 # Cinema online purchase system
 
-Online purchase system for Cinema.
+Online purchase system for a Cinema.
 <br/>
 This project is based on the 4-layer model:
 - Database (Sql server)

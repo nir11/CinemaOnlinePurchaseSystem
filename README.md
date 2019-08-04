@@ -23,14 +23,14 @@ This project is based on the 4-layer model:
 <span>=================================================================================</span>
 <div>
     <h3>1. Hall Page</h3>
-    <span>Choose your seat positions and finish your order</span>
+    <span>Choose your seat position and finish your order</span>
     <br/>
     <img src="WebApi/Screenshots/image3.JPG" width="800">
 </div>
 <span>=================================================================================</span>
 <div>
     <h3>2. Orders History</h3>
-    <span>Including all the user's purchase history</span>
+    <span>Display the purchase history for each user</span>
     <br/>                                                                                                                              
     <img src="WebApi/Screenshots/image4.JPG" width="800" />
 </div>
